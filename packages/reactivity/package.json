@@ -21,9 +21,10 @@
     "url": "git@gitee.com:yiyi520/mini-dev-vue3.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "jest"
   },
   "devDependencies": {
+    "jest": "^27.3.1",
     "jquery": "^3.6.0"
   }
 }

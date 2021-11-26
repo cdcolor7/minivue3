@@ -1,7 +1,5 @@
 'use strict';
 
-const reactivity = require('..');
-
-describe('reactivity', () => {
-    it('needs tests');
+test('reactivity', () => {
+    expect('reactivity').toBe('reactivity');
 });
