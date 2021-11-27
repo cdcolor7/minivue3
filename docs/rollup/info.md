@@ -103,6 +103,6 @@ yarn add  -W -D @babel/preset-env @babel/preset-typescript
 
 ## 整合typescript
 ``` bash
-yarn add -D typescript
+yarn add -D -W typescript
 ./node_modules/.bin/tsc --init
 ```

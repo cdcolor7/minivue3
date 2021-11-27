@@ -1,11 +1,11 @@
 {
-  "name": "@min-dev-vue3/reactivity",
+  "name": "@mini-dev-vue3/reactivity",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
   "author": "cdcolor7 <276214101@qq.com>",
   "license": "ISC",
-  "main": "lib/reactivity.js",
+  "main": "lib/index.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -24,7 +24,6 @@
     "test": "jest"
   },
   "devDependencies": {
-    "jest": "^27.3.1",
     "jquery": "^3.6.0"
   }
 }
