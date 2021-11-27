@@ -52,19 +52,39 @@ export default {
   ]
 }
 ```
-## 其他插件（扩展）
-rollup-plugin-typescript typescript支持  
-rollup-plugin-terser 代码压缩  
-@rollup/plugin-babel babel
+## 整合typescript
+``` bash
+yarn add -D -W rollup-plugin-typescript2  # ts转换
+yarn add -D -W typescript  # ts解析器
 
+./node_modules/.bin/tsc --init
+```
+``` javascript
+import ts from "rollup-plugin-typescript2";
+const extensions = [
+  '.js',
+  '.ts',
+  '.tsx'
+]
+export default {
+  plugins: [
+    ts({
+      tsconfig: path.resolve(__dirname, './tsconfig.json'), // 导入本地ts配置
+      extensions
+    }),
+  ]
+}
+```
+## Babel
+Babel 是一个 JavaScript 编译器
+- 语法转换
+- 通过 Polyfill 方式在目标环境中添加缺失的特性 （通过引入第三方 polyfill 模块，例如 core-js）
+- 源码转换（codemods）
 ``` bash
 yarn add  -W -D @rollup/plugin-babel @babel/core
 yarn add  -W @babel/polyfill
 ```
-
-``` javascript
-import ts from "rollup-plugin-typescript";
-import terser from "rollup-plugin-terser";
+``` js
 import babel from '@rollup/plugin-babel';
 
 export default {
@@ -77,7 +97,6 @@ export default {
   ]
 }
 ```
-
 ## 配置.babelrc配置文件
 安装Preset部门 -D  
 @babel/preset-env : 编译js语法;  
@@ -92,7 +111,7 @@ yarn add  -W -D @babel/preset-env @babel/preset-typescript
 {
   "presets": [["@babel/preset-env", {
     "targets": {
-      "browserslist": ["last 2 versions","> 1%"]
+      "browsers": ["last 2 versions","> 1%"]
     }, // 目标浏览器集合
     "corejs":2, // corejs的版本
     "useBuiltIns": "usage" // 按需加载
@@ -100,9 +119,16 @@ yarn add  -W -D @babel/preset-env @babel/preset-typescript
   ]
 }
 ```
+## 其他插件（扩展）
 
-## 整合typescript
-``` bash
-yarn add -D -W typescript
-./node_modules/.bin/tsc --init
+rollup-plugin-terser 代码压缩  
+
+``` javascript
+import terser from "rollup-plugin-terser";
+
+export default {
+  plugins: [
+    terser()
+  ]
+}
 ```

@@ -52,12 +52,12 @@ npm link
 ## 添加依赖
 1.根文件安装依赖
 ``` bash
-yarn add -W -D '包名称'
+yarn add -W -D '包名'
 ```
 
 2.所有子项目同时安装依赖
 ``` bash
-lerna add xxx 给全局安装
+lerna add 包名  # 给全局安装
 lerna bootstrap #  等于 yarn install,将依赖提升到根目录下的node_modules。
 ```
 
