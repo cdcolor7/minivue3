@@ -27,12 +27,12 @@ export default {
       { text: 'Vue3', link: '/vue3/index', activeMatch: '^/$|^/vue3/' },
       {
         text: 'Lerna',
-        link: '/lerna/index',
+        link: '/lerna/info',
         activeMatch: '^/lerna/'
       },
       {
         text: 'Rollup',
-        link: '/rollup/index',
+        link: '/rollup/info',
         activeMatch: '^/rollup/'
       },
       {
@@ -72,7 +72,7 @@ function getLernaSidebar() {
   return [
     {
       text: 'Lerna',
-      children: [{ text: '基本使用', link: '/lerna/index' }]
+      children: [{ text: '基本使用', link: '/lerna/info' }]
     }
   ]
 }
@@ -81,7 +81,9 @@ function getConfigSidebar() {
   return [
     {
       text: 'Rollup',
-      children: [{ text: '基本使用', link: '/rollup/index' }]
+      children: [
+        { text: '基本使用', link: '/rollup/info' },
+      ]
     }
   ]
 }
