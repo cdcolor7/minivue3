@@ -33,9 +33,9 @@ rollup --config my.config.js
 你必须使用配置文件才能执行以下操作：  
 
 把一个项目打包，然后输出多个文件  
-@rollup/plugin-node-resolve 插件可以解决 ES6模块的查找导入。  
-@rollup/plugin-commonjs 但是npm中的大多数包都是以CommonJS模块的形式出现的，所以需要使用这个插件将CommonJS模块转换为 ES2015 供 Rollup 处理。  
-@rollup/plugin-json rollup默认只解析js文件 导入json需要引入相关插件
+- @rollup/plugin-node-resolve 插件可以解决 ES6模块的查找导入。  
+- @rollup/plugin-commonjs 但是npm中的大多数包都是以CommonJS模块的形式出现的，所以需要使用这个插件将CommonJS模块转换为 ES2015 供 Rollup 处理。  
+- @rollup/plugin-json rollup默认只解析js文件 导入json需要引入相关插件
 
 ``` javascript
 import resolve from "@rollup/plugin-node-resolve";
@@ -99,10 +99,10 @@ export default {
 ```
 ## 配置.babelrc配置文件
 安装Preset部门 -D  
-@babel/preset-env : 编译js语法;  
-@babel/preset-react ：编译react语法 JSX;  
-@babel/preset-typescript： 编译ts语法;   
-@babel/preset-flow： 编译flow语法;  
+- @babel/preset-env : 编译js语法;  
+- @babel/preset-react ：编译react语法 JSX;  
+- @babel/preset-typescript： 编译ts语法;   
+- @babel/preset-flow： 编译flow语法;  
 ``` bash
 yarn add  -W -D @babel/preset-env @babel/preset-typescript
 ```
@@ -121,7 +121,7 @@ yarn add  -W -D @babel/preset-env @babel/preset-typescript
 ```
 ## 其他插件（扩展）
 
-rollup-plugin-terser 代码压缩  
+- rollup-plugin-terser 代码压缩  
 
 ``` javascript
 import terser from "rollup-plugin-terser";
