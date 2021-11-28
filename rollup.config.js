@@ -4,10 +4,10 @@ import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from "@rollup/plugin-node-resolve";
 import ts from 'rollup-plugin-typescript2'
 import babel from '@rollup/plugin-babel'
-// import terser from 'rollup-plugin-terser'
+import { terser } from 'rollup-plugin-terser'
 
 if(!process.env.TARGET) {
-  throw new Error('必须指定目标包')
+  throw new Error('必须指定打包目标项目！')
 }
 
 const packagesDir = path.resolve(__dirname, 'packages') // 解析packages目录
@@ -30,18 +30,19 @@ const outputConfigs = {
   },
   global: {
     file: resolve(`dist/${name}.global.js`),
-    name: 'Vue',
+    name: `Vue`,
     format: `iife`
   },
 }
 
-const defaultFormats = ['esm-bundler', 'cjs']
+const defaultFormats = ['esm-bundler', 'cjs','global']
 const inlineFormats = process.env.FORMATS && process.env.FORMATS.split('/')
 const packageFormats = inlineFormats || packageOptions.formats || defaultFormats
 const packageConfigs = packageFormats.map(format => createConfig(format, outputConfigs[format]))
 
 export default packageConfigs
 
+// 创建rollup配置对象
 function createConfig(format, output, plugins = []) {
   if(!output) {
     console.log(require('chalk').yellow(`invalid format: "${format}"`))
@@ -49,9 +50,11 @@ function createConfig(format, output, plugins = []) {
   }
 
   output.sourcemap = !!process.env.SOURCE_MAP
-
-  const shouldEmitDeclarations = pkg.types && process.env.TYPES != null && !hasTSChecked
-
+  if(process.env.NODE_ENV === 'production') {
+    output.plugins = [terser()]
+  }
+  // const shouldEmitDeclarations = pkg.types && process.env.TYPES != null && !hasTSChecked
+  const shouldEmitDeclarations = pkg.types && !hasTSChecked
   const tsPlugin = ts({
     check: process.env.NODE_ENV === 'production' && !hasTSChecked,
     tsconfig: path.resolve(__dirname, 'tsconfig.json'),
@@ -59,15 +62,15 @@ function createConfig(format, output, plugins = []) {
     tsconfigOverride: {
       compilerOptions: {
         sourceMap: output.sourcemap,
-        declaration: shouldEmitDeclarations,
-        declarationMap: shouldEmitDeclarations
+        declaration: shouldEmitDeclarations, // 创建类型声明文件
+        declarationMap: shouldEmitDeclarations // 指定是否为声明文件.d.ts生成map文件 
       },
       exclude: ['**/__tests__', 'test-dts']
     }
   })
   hasTSChecked = true
 
-  let entryFile = 'lib/index.ts' // 暂时不区分运行时runtime
+  let entryFile = 'lib/index.ts' // 暂时不区分运行时runtime版本
   let external = []
   const extensions = ['.js', '.ts', '.tsx']
   return {

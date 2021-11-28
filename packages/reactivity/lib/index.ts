@@ -1,4 +1,4 @@
-function reactive1<T>(p1: T): T {
+function reactive1(p1: string) {
     return p1
 }
 

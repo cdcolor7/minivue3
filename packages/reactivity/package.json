@@ -6,6 +6,7 @@
   "author": "cdcolor7 <276214101@qq.com>",
   "license": "ISC",
   "main": "lib/index.ts",
+  "types": "dist/reactivity.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -15,8 +16,7 @@
   ],
   "buildOptions": {
     "formats": [
-      "esm-bundler",
-      "cjs"
+      "esm-bundler"
     ]
   },
   "publishConfig": {
