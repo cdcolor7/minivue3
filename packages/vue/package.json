@@ -24,10 +24,6 @@
   "scripts": {
     "test": "jest"
   },
-  "devDependencies": {
-    "jquery": "^3.6.0"
-  },
-  "dependencies": {
-    "@mini-dev-vue3/reactivity": "^1.0.0"
-  }
+  "devDependencies": {},
+  "dependencies": {}
 }

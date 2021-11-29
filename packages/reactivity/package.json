@@ -29,7 +29,5 @@
   "scripts": {
     "test": "jest"
   },
-  "devDependencies": {
-    "jquery": "^3.6.0"
-  }
+  "devDependencies": {}
 }

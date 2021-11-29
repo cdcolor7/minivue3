@@ -1,11 +1,7 @@
 import { reactive1 } from '@mini-dev-vue3/reactivity';
 import { testOne } from './other.js'
-const createApp = function() {
-    const reactive = reactive1('1212')
+export function createApp() {
     const test = testOne(1)
-    console.log(test);
-    return reactive
-}
-export {
-    createApp
+    console.log(reactive1('1212'));
+    return test
 }
