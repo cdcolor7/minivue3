@@ -110,12 +110,11 @@ yarn add  -W -D @babel/preset-env @babel/preset-typescript
 ``` json
 {
   "presets": [["@babel/preset-env", {
-    "targets": {
-      "browsers": ["last 2 versions","> 1%"]
-    }, // 目标浏览器集合
+    "targets":  ["last 2 versions","> 1%"], // 目标浏览器集合
     "corejs":2, // corejs的版本
     "useBuiltIns": "usage" // 按需加载
   }],
+  ["@babel/preset-typescript"]
   ]
 }
 ```
@@ -132,3 +131,35 @@ export default {
   ]
 }
 ```
+## tsconfig的配置
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "sourceMap": false,
+    "target": "es2016",
+    "module": "esnext",
+    "rootDir": ".", 
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "allowJs": false,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "paths":{
+      "@mini-dev-vue3/*": ["packages/*/lib"]
+    }
+  }
+}
+```
+- target: 编译目标  
+- module: 制定编译模块  
+- rootDir：编译文件根目录  
+- baseUrl：设置解析非相对模块名称的基本目录  
+- esModuleInterop：通过为导入内容创建命名空间  
+- moduleResolution：用于选择模块解析  
+- allowJs：用来指定是否允许编译js文件，默认是false，即不编译js文件  
+- experimentalDecorators： 启用装饰器  
+- paths: 用于设置模块名称到基于baseUrl的路径映射（配置paths字段，这样开发的时候ts才不会报找不到包的错）。
+

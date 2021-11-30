@@ -60,8 +60,21 @@ yarn add -W -D '包名'
 lerna add 包名  # 给全局安装
 lerna bootstrap #  等于 yarn install,将依赖提升到根目录下的node_modules。
 ```
+3.子包间的相互依赖
+```base
+lerna add 包名 --scope=项目名 -D
+```
+```json
+{
+  "name": "prject-A",
+  "dependencies": {
+    "prject-B": "workspace:*"
+  }
+}
+```
+workspace:*表示在prject-A包执行lerna publish的时候，会自动将prject-B的版本更换为prject-B包的版本。
 
-3.单个子项目安装依赖
+4.单个子项目安装依赖
 ``` bash
 lerna add 包名 --scope=项目名 -D
 yarn workspace 项目名 add 包名 -D
@@ -102,3 +115,18 @@ lerna run --stream --sort build
 lerna version # 升级版本
 lerna publish # 版本发布
 ```
+## babel 在 lerna 项目中的集成
+1. 在项目顶层目录下创建 一个 babel.config.json 并给其设置 babelrcRoots 选项，这个选项用来设置那些子 package 会被 babel 视为"根“(不被 babel 视为根的子 程序包中的 babelrc 配置文件不会生效)
+```js
+// /babel.config.js
+module.exports = function(api) {
+  api.cache(true);
+  return { 
+    babelrcRoots: [
+        ".",
+        "packages/*" // 将子程序包都作为工作目录
+     ] 
+  };
+};
+```
+2. 在子 package 中设置 [.babelrc.js](/rollup/info.html#配置-babelrc配置文件) 作为配置文件而不是 babel.config.js

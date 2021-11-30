@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "sourceMap": false,
     "target": "es2016",
     "module": "esnext",
@@ -10,6 +11,9 @@
     "strict": true,
     "allowJs": false,
     "skipLibCheck": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "paths":{
+      "@mini-dev-vue3/*": ["packages/*/lib"]
+    }
   }
 }

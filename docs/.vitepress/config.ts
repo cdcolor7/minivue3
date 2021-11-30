@@ -83,6 +83,7 @@ function getConfigSidebar() {
       text: 'Rollup',
       children: [
         { text: '基本使用', link: '/rollup/info' },
+        { text: 'tsconfig配置详解', link: '/rollup/tsconfig' },
       ]
     }
   ]
