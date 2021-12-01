@@ -1,12 +1,12 @@
 {
-  "name": "@mini-dev-vue3/vue",
+  "name": "@mini-dev-vue3/runtime-dom",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [],
+  "description": "> TODO: description",
   "author": "cdcolor7 <276214101@qq.com>",
+  "homepage": "",
   "license": "ISC",
   "main": "index.js",
-  "types": "dist/vue.d.ts",
+  "types": "dist/runtime-dom.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -23,6 +23,5 @@
   },
   "scripts": {
     "test": "jest"
-  },
-  "devDependencies": {}
+  }
 }

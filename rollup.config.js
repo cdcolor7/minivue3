@@ -51,7 +51,7 @@ function createConfig(format, output, plugins = []) {
 
   output.sourcemap = !!process.env.SOURCE_MAP
   if(process.env.NODE_ENV === 'production') {
-    // plugins.push(terser())
+    plugins.push(terser())
   }
   // const shouldEmitDeclarations = pkg.types && process.env.TYPES != null && !hasTSChecked
   const shouldEmitDeclarations = pkg.types && !hasTSChecked

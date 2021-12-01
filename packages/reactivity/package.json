@@ -5,7 +5,7 @@
   "keywords": [],
   "author": "cdcolor7 <276214101@qq.com>",
   "license": "ISC",
-  "main": "lib/index.ts",
+  "main": "index.js",
   "types": "dist/reactivity.d.ts",
   "directories": {
     "lib": "lib",

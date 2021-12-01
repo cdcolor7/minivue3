@@ -69,7 +69,6 @@ async function build(target) {
       stdio: 'inherit'
     }
   )
-  
   if (pkg.types) { // buildTypes && pkg.types
     console.log()
     console.log(

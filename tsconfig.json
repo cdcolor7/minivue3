@@ -13,7 +13,8 @@
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "paths":{
-      "@mini-dev-vue3/*": ["packages/*/lib"]
+      "@mini-dev-vue3/*": ["packages/*/lib"],
+      "mini-dev-vue3": ["packages/vue/lib"]
     }
   }
 }
