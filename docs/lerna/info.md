@@ -13,7 +13,7 @@ lerna init --independent / -i # 使用独立的版本控制模式
 lerna bootstrap # 在当前 lerna 仓库中执行引导流程（bootstrap）
 ```
 
-## lerna 和 yarn workspace 同时使用
+## yarn workspace 的使用
 在 lerna.json 添加
 ``` json
 {
@@ -115,7 +115,7 @@ lerna run --stream --sort build
 lerna version # 升级版本
 lerna publish # 版本发布
 ```
-## babel 在 lerna 项目中的集成
+## 集成Babel
 1. 在项目顶层目录下创建 一个 babel.config.json 并给其设置 babelrcRoots 选项，这个选项用来设置那些子 package 会被 babel 视为"根“(不被 babel 视为根的子 程序包中的 babelrc 配置文件不会生效)
 ```js
 // /babel.config.js

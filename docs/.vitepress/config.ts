@@ -26,7 +26,7 @@ export default {
     nav: [
       { text: 'Vue3', link: '/vue3/index', activeMatch: '^/$|^/vue3/' },
       {
-        text: 'Lerna',
+        text: 'Monorepo',
         link: '/lerna/info',
         activeMatch: '^/lerna/'
       },
@@ -71,8 +71,12 @@ function getGuideSidebar() {
 function getLernaSidebar() {
   return [
     {
-      text: 'Lerna',
-      children: [{ text: '基本使用', link: '/lerna/info' }]
+      text: 'Monorepo',
+      children: [
+        { text: 'Lerna', link: '/lerna/info' },
+        { text: 'Pnpm', link: '/lerna/pnmp' },
+        { text: '版本号管理', link: '/lerna/version' }
+      ]
     }
   ]
 }
