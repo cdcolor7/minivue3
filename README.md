@@ -15,6 +15,7 @@ yarn # 必须
 yarn dev <name> -s  # '<name>打包目标[为空默认vue,]'; -s '是否开启souceMap'
 ```
 #### 启动docs
+vue3源码详细说明，lerna、pnpm、rollup相关使用说明。
 ``` bash
 yarn doc:dev
 ```
