@@ -1,6 +1,6 @@
 # mini-dev-vue3
 
-#### 介绍
+### 介绍
 深入学习vue3源代码，基于TypeScript语言开发、Lerna + Monorepo多包管理实现一个mini版的vue3框架
 
 #### 安装依赖
@@ -30,7 +30,14 @@ yarn test
 ``` bash
 yarn build <name>  # '<name>构建目标[为空默认全部]'
 ```
-
+### Tasking
+...
+输出中...
+...
+### vue3源码思维导图
+...
+输出中...
+...
 #### 参与贡献
 
 1.  Fork 本仓库
