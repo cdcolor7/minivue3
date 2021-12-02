@@ -30,7 +30,6 @@ const outputConfigs = {
   },
   global: {
     file: resolve(`dist/${name}.global.js`),
-    name: `Vue`,
     format: `iife`
   },
 }
@@ -39,7 +38,14 @@ const defaultFormats = ['esm-bundler', 'cjs','global']
 const inlineFormats = process.env.FORMATS && process.env.FORMATS.split('/')
 const packageFormats = inlineFormats || packageOptions.formats || defaultFormats
 const packageConfigs = packageFormats.map(format => createConfig(format, outputConfigs[format]))
-
+if (process.env.NODE_ENV === 'production') {
+  packageFormats.forEach(format => {
+    if (packageOptions.prod === false) {
+      return
+    }
+      packageConfigs.push(createProductionConfig(format))
+  })
+}
 export default packageConfigs
 
 // 创建rollup配置对象
@@ -50,9 +56,17 @@ function createConfig(format, output, plugins = []) {
   }
 
   output.sourcemap = !!process.env.SOURCE_MAP
-  if(process.env.NODE_ENV === 'production') {
+
+  const isProductionBuild = /\.prod\.js$/.test(output.file)
+  const isGlobalBuild = /global/.test(format)
+
+  if (isGlobalBuild) {
+    output.name = packageOptions.name // iife umd 必须设置 name
+  }
+  if(isProductionBuild) {
     plugins.push(terser())
   }
+
   // const shouldEmitDeclarations = pkg.types && process.env.TYPES != null && !hasTSChecked
   const shouldEmitDeclarations = pkg.types && !hasTSChecked
   const tsPlugin = ts({
@@ -95,4 +109,12 @@ function createConfig(format, output, plugins = []) {
       commonjs()
     ]
   }
+}
+
+// 生产环境打包配置
+function createProductionConfig(format) {
+  return createConfig(format, {
+    file: resolve(`dist/${name}.${format}.prod.js`),
+    format: outputConfigs[format].format
+  })
 }
