@@ -14,6 +14,12 @@
   "files": [
     "lib"
   ],
+  "buildOptions": {
+    "formats": [
+      "esm-bundler",
+      "cjs"
+    ]
+  },
   "publishConfig": {
     "registry": "http://registry.npm.taobao.org/"
   },

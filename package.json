@@ -1,6 +1,9 @@
 {
-  "name": "mini-dev-vue3",
   "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "dev": "node script/dev.js vue -s",
     "build": "node script/build.js vue",
@@ -31,9 +34,6 @@
     "vitepress": "^0.20.1",
     "vitepress-theme-demoblock": "^1.4.2"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "dependencies": {
     "@babel/polyfill": "^7.12.1"
   }

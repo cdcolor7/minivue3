@@ -110,6 +110,7 @@ async function build(target) {
     }
 
     await fs.remove(`${pkgDir}/dist/packages`)
+    await fs.remove(path.resolve(`dist`)) // 删除根路径的dist输出目录
   }
 
 

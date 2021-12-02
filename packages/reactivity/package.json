@@ -15,9 +15,7 @@
     "lib"
   ],
   "buildOptions": {
-    "formats": [
-      "esm-bundler"
-    ]
+    "name": "VueReactivity"
   },
   "publishConfig": {
     "registry": "http://registry.npm.taobao.org/"

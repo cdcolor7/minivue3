@@ -14,6 +14,13 @@
   "files": [
     "lib"
   ],
+  "buildOptions": {
+    "name": "VueRuntimeCore",
+    "formats": [
+      "esm-bundler",
+      "cjs"
+    ]
+  },
   "publishConfig": {
     "registry": "http://registry.npm.taobao.org/"
   },
