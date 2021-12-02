@@ -12,7 +12,7 @@ yarn # 必须
 #### 开发
 开发文件测试目录：./packages/vue/examples/
 ``` bash
-yarn dev <name> -s  # '<name>打包目标[默认vue,]'; -s '是否开启souceMap'
+yarn dev <name> -s  # '<name>打包目标[为空默认vue,]'; -s '是否开启souceMap'
 ```
 #### 启动docs开发
 ``` bash
@@ -27,7 +27,7 @@ yarn test
 #### 构建
 构建输出文件目录：./packages/*/dist/
 ``` bash
-yarn build <name>  # '<name>打包目标[默认全部]'
+yarn build <name>  # '<name>打包目标[为空默认全部]'
 ```
 
 #### 参与贡献
