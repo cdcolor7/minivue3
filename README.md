@@ -74,9 +74,7 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 #### vue
 - [✖️] vue打包入口 区分runtime/full-build构建
 ### vue3源码思维导图
-...
-输出中...
-...
+[Vue3源码思维导图](https://www.processon.com/embed/617575b0f346fb01b90aff7b)  
 ### 参与贡献
 
 1.  Fork 本仓库

@@ -49,6 +49,6 @@
 #### vue
 - [✔️] vue打包入口 区分runtime/full-build构建
 ### vue3源码思维导图
-...
-输出中...
-...
+
+[Vue3源码思维导图](https://www.processon.com/embed/617575b0f346fb01b90aff7b)  
+
