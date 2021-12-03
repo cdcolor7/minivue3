@@ -31,9 +31,48 @@ yarn test
 yarn build <name>  # '<name>构建目标[为空默认全部]'
 ```
 ### Tasking
-...
-输出中...
-...
+#### compiler-core
+- [✖️] Parse AST的实现
+- [✖️] Transform AST优化
+- [✖️] Codegen 生成render函数
+#### compiler-dom
+- [✖️] compiler 浏览器编译模块
+#### reactivity
+- [✖️] reactive 的实现
+- [✖️] ref 的实现
+- [✖️] readonly 的实现
+- [✖️] computed 的实现
+- [✖️] track 依赖收集
+- [✖️] trigger 触发依赖
+- [✖️] 支持 isReactive
+- [✖️] 支持嵌套 reactive
+- [✖️] 支持 toRaw
+- [✖️] 支持 effect.scheduler
+- [✖️] 支持 effect.stop
+- [✖️] 支持 isReadonly
+- [✖️] 支持 isProxy
+- [✖️] 支持 shallowReadonly
+- [✖️] 支持 proxyRefs
+#### runtime-core
+- [✖️] 支持组件类型
+- [✖️] 支持 element 类型
+- [✖️] 初始化 props
+- [✖️] setup 可获取 props 和 context
+- [✖️] 支持 component emit
+- [✖️] 支持 proxy
+- [✖️] 可以在 render 函数中获取 setup 返回的对象
+- [✖️] nextTick 的实现
+- [✖️] 支持 getCurrentInstance
+- [✖️] 支持 provide/inject
+- [✖️] 支持最基础的 slots
+- [✖️] 支持 Text 类型节点
+- [✖️] 支持 $el api
+#### runtime-core
+- [✖️] 浏览器的runtime，处理原生DOM API
+#### shared
+- [✖️] 工具库，通用方法
+#### vue
+- [✖️] vue打包入口 区分runtime/full-build构建
 ### vue3源码思维导图
 ...
 输出中...
