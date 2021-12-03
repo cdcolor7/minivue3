@@ -53,16 +53,42 @@ export default {
 function getGuideSidebar() {
   return [
     {
-      text: '阅前必读',
+      text: '准备工作',
       children: [
         { text: '开篇词', link: '/vue3/index' },
+        { text: '目录结构', link: '/vue3/prepare/catalogue' },
+        { text: '源码构建', link: '/vue3/prepare/build' },
+        { text: 'Vue3入口', link: '/vue3/prepare/entrance' },
       ]
     },
     {
-      text: '前置知识',
+      text: 'Compiler-Core',
       children: [
-        { text: 'es6', link: '/vue3/index' },
-        { text: 'Typescript', link: '/vue3/index' },
+        { text: 'Introduction', link: '/vue3/compiler/core-index' },
+      ]
+    },
+    {
+      text: 'Compiler-Dom',
+      children: [
+        { text: 'Introduction', link: '/vue3/compiler/dom-index' },
+      ]
+    },
+    {
+      text: 'Reactivity',
+      children: [
+        { text: 'Introduction', link: '/vue3/reactivity/index' },
+      ]
+    },
+    {
+      text: 'Runtime-Core',
+      children: [
+        { text: 'Introduction', link: '/vue3/runtime/core-index' },
+      ]
+    },
+    {
+      text: 'Runtime-Dom',
+      children: [
+        { text: 'Introduction', link: '/vue3/runtime/dom-index' },
       ]
     }
   ]
