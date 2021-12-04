@@ -1,5 +1,5 @@
 ## 介绍
-Rollup 是一个 JavaScript 模块打包器，可以将小块代码编译成大块复杂的代码，例如 library 或应用程序。
+Rollup 是一个 JavaScript 模块打包器，可以将小块代码编译成大块复杂的代码。
 ## 配置文件
 
 Rollup的配置文件是可选的，但是使用配置文件的作用很强大，而且很方便，因此我们推荐你使用  
@@ -79,7 +79,7 @@ export default {
 Babel 是一个 JavaScript 编译器
 - 语法转换
 - 通过 Polyfill 方式在目标环境中添加缺失的特性 （通过引入第三方 polyfill 模块，例如 core-js）
-- 源码转换（codemods）
+- 源码转换
 ``` bash
 yarn add  -W -D @rollup/plugin-babel @babel/core
 yarn add  -W @babel/polyfill
