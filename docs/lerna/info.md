@@ -8,7 +8,7 @@ lerna & yarn & monorepo 组合
 
 ## 初始化
 ``` bash
-全局安装 npm install -g lerna
+npm install -g lerna #全局安装 
 lerna init --independent / -i # 使用独立的版本控制模式
 lerna bootstrap # 在当前 lerna 仓库中执行引导流程（bootstrap）
 ```
@@ -62,9 +62,11 @@ lerna bootstrap #  等于 yarn install,将依赖提升到根目录下的node_mod
 ```
 3.子包间的相互依赖
 ```base
+# 方法一
 lerna add 包名 --scope=项目名 -D
 ```
 ```json
+# 方法二
 {
   "name": "prject-A",
   "dependencies": {
