@@ -148,4 +148,4 @@ function createMinifiedConfig(format, output, plugins = []) {
 }
 ```
 ## 总结
-通过这一节的分析，我们可以了解到 Vue3 的构建打包过程，也知道了不同作用和功能的 package 它们对应的入口以及最终编译生成的 JS 文件。Vue3实际开发项目，尽管我们会用 Runtime Only 版本开发比较多，但为了分析 Vue3 的编译过程，解析我们重点分析的源码是 Runtime + Compiler 的 Vue3.js。
+通过这一节的分析，我们可以了解到 Vue3 的构建打包过程，也知道了不同作用和功能的 package 它们对应的入口以及最终编译生成的 JS 文件。Vue3实际开发项目，尽管我们会用 [Runtime Only](/vue3/prepare/entrance.html#runtime-only-vs-runtime-compiler) 版本开发比较多，但为了分析 Vue3 的编译过程，解析我们重点分析的源码是 Runtime + Compiler 的 Vue3.js。
