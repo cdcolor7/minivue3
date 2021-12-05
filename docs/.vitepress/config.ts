@@ -99,8 +99,8 @@ function getLernaSidebar() {
     {
       text: 'Monorepo',
       children: [
-        { text: 'Lerna', link: '/lerna/info' },
-        { text: 'Pnpm', link: '/lerna/pnmp' },
+        { text: 'lerna', link: '/lerna/info' },
+        { text: 'pnpm', link: '/lerna/pnmp' },
         { text: '版本号管理', link: '/lerna/version' }
       ]
     }

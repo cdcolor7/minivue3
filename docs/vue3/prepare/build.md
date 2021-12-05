@@ -1,5 +1,5 @@
 # 源码构建
-Vue3 源码采用monorepo管理模式，通过[pnpm](/lerna/pnmp.html)进行管理，达到了在一个repo 中高效便捷地管理多个package的目,可以批量构建所有package包，也可以单独制定构建目标。  
+Vue3 源码采用monorepo管理模式，通过[pnpm](/lerna/pnmp.html)进行多包管理，达到了在一个repo 中高效便捷地管理多个package的目,可以批量构建所有package包，也可以单独制定构建目标。  
   
 Vue3 源码是基于 [Rollup](/rollup/info.html) 构建的，它的构建脚本文件都在 scripts 目录下。
 

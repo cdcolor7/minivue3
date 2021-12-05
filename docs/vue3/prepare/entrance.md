@@ -1,5 +1,5 @@
 # Vue3构建入口
-此处是vue3代码的打包文件目录：
+此处是vue3代码的打包入口文件目录：
 ``` js
 // ./packages/vue/src
 ├── index.ts   // vue3 完整版本    runtime + compiler
