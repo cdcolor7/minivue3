@@ -1,3 +1,1 @@
-export function Runtime() {
-    console.log('Runtime');
-}
+export * from '@mini-dev-vue3/runtime-dom'

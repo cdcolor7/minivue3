@@ -70,8 +70,8 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 #### runtime-core
 - [✖️] 浏览器的runtime，处理原生DOM API
 #### shared
-- [✖️] 工具库，通用方法
+- [✔️] 工具库，通用方法
 #### vue
-- [✖️] vue打包入口 区分runtime/full-build构建
+- [✔️] vue打包入口 区分runtime/full-build构建
 ### vue3源码思维导图
 [Vue3源码思维导图](https://www.processon.com/view/link/6175765c7d9c08459faeddf0#map)  

@@ -1,3 +1,3 @@
-export function compilerDom() {
+export function compile() {
     // TODO
 }
