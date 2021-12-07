@@ -2,20 +2,20 @@
 源码重点关注packages目录,主体结构如下：
 ``` js
 ├── packages
-    ├── compiler-core // 与平台无关的运行时编译器核心
+    ├── compiler-core // 平台无关的编译器核心代码. 它既包含可扩展的基础功能，也包含所有平台无关的插件。
     ├── compiler-dom  // 针对浏览器的编译器模块
     ├── compiler-sfc  // 单文件编译部分
     ├── compiler-ssr  // 服务端渲染编译
     ├── global.d.ts   // 全局声明文件
     ├── reactivity    // 响应式系统，可以和任何框架搭配使用，使用proxy
     ├── runtime-core  // 与平台无关的运行时虚拟DOM渲染器，vue组件和各种API。可针对某个具体平台实现高阶runtime，比如自定义渲染器
-    ├── runtime-dom   // 针对浏览器的runtime。包含处理原生DOM API 
+    ├── runtime-dom   // 针对浏览器的 runtime。其功能包括处理原生 DOM API、DOM 事件和 DOM 属性等。
     ├── runtime-test  // 一个专门为了测试而写的轻量级 runtime。
     ├── server-rendere // 服务器端渲染
     ├── shared         // 内部工具库
     ├── size-check     // 测试代码体积大小
     ├── template-explorer   // 调试编译器输出的开发工具
-    └── vue                 // Vue3的完整版本, 包含运行时和编译器
+    └── vue                 // 用于构建vue「完整构建」版本, 引用了运行时和编译器
 ├── scripts // 脚本文件，包含配置文件，进行编译和打包
 ├── test-dts // 测试文件
 ├── .eslintrc.js
