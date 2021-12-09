@@ -121,13 +121,21 @@ yarn add  -W -D @babel/preset-env @babel/preset-typescript
 ## 其他插件（扩展）
 
 - rollup-plugin-terser 代码压缩  
+- @rollup/plugin-replace 替换文件中的目标字符串
+
 
 ``` javascript
 import terser from "rollup-plugin-terser";
+import replace from "@rollup/plugin-replace";
 
 export default {
   plugins: [
-    terser()
+    terser(),
+    replace({
+      __DEV__: true,
+      __COMMIT__: true,
+      __BROWSER__: true,
+    })
   ]
 }
 ```
