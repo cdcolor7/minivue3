@@ -14,9 +14,8 @@ const hasOwnProperty = Object.prototype.hasOwnProperty
 export const hasOwn = (val: object, key: string|symbol):boolean => hasOwnProperty.call(val, key)
 
 export const isArray = Array.isArray
-export const isObject = (val: unknown) => {
-    return val !== null && typeof val === 'object'
-}
+export const isString = (val: unknown) => typeof val === 'string'
+export const isObject = (val: unknown) => val !== null && typeof val === 'object'
 
 const camelizeRE = /-(\W)/g
 /**

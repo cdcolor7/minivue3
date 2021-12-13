@@ -7,10 +7,11 @@
   <title>mini-dev-vue3</title>
 </head>
 <body>
-<script src="../dist/vue.global.js"></script>
-<script>
-  const { createApp } = Vue
-  console.log(createApp());
-</script>
+  <div id="app1"></div>
+  <script src="../dist/vue.global.js"></script>
+  <script>
+    const { createApp } = Vue
+    createApp().mount('#app')
+  </script>
 </body>
 </html>
