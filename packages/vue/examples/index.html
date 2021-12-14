@@ -11,7 +11,9 @@
   <script src="../dist/vue.global.js"></script>
   <script>
     const { createApp } = Vue
-    createApp().mount('#app')
+    createApp({
+      setup() {}
+    }).mount('#app')
   </script>
 </body>
 </html>

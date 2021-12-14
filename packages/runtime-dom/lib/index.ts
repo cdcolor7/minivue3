@@ -1,20 +1,11 @@
-import { Renderer } from '@vue/runtime-core'
+import { Renderer, createRenderer, CreateAppFunction } from '@vue/runtime-core'
+
   
 import { isString, extend } from '@mini-dev-vue3/shared'
    
 const rendererOptions = {} // extend({ patchProp }, nodeOps)
 
 let renderer: any // Renderer<Element | ShadowRoot>
-
-function createRenderer(options:any) {
-    return {
-        createApp:  () => {
-            return {
-                mount: () => {}
-            }
-        }
-    }
-}
 
 
 function ensureRenderer() {
@@ -24,7 +15,7 @@ function ensureRenderer() {
     )
   }
   
-export const createApp = (...args) => {
+export const createApp = ((...args) => {
     const app = ensureRenderer().createApp(...args) 
     const { mount } = app
     app.mount = (containerOrSelector: Element | ShadowRoot | string): any => {
@@ -36,7 +27,7 @@ export const createApp = (...args) => {
         return proxy
     }
     return app
-}
+}) as CreateAppFunction<Element>
 
 // 标准化容器 -- 待调试...
 function normalizeContainer(
