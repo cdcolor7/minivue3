@@ -7,13 +7,17 @@
   <title>mini-dev-vue3</title>
 </head>
 <body>
-  <div id="app1"></div>
+  <div id="app"></div>
   <script src="../dist/vue.global.js"></script>
   <script>
     const { createApp } = Vue
-    createApp({
-      setup() {}
-    }).mount('#app')
+    const app = createApp({
+      setup() {
+        console.log('hello setup');
+      }
+    })
+    app.mount('#app')
+    console.log(app);
   </script>
 </body>
 </html>
