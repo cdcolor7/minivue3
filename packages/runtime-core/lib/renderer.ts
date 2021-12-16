@@ -58,6 +58,7 @@ function baseCreateRenderer(
         // unmount(container._vnode, null, null, true)
       }
     } else {
+      console.log('render start');
       // patch(container._vnode || null, vnode, container, null, null, null, isSVG)
     }
     // flushPostFlushCbs()

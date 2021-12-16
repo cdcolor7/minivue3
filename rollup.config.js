@@ -3,6 +3,7 @@ import json from '@rollup/plugin-json'
 import commonjs from '@rollup/plugin-commonjs'
 import nodeResolve from "@rollup/plugin-node-resolve";
 import ts from 'rollup-plugin-typescript2'
+import replace from '@rollup/plugin-replace'
 import babel from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 
@@ -10,6 +11,7 @@ if(!process.env.TARGET) {
   throw new Error('必须指定打包目标项目！')
 }
 
+const masterVersion = require('./package.json').version
 const packagesDir = path.resolve(__dirname, 'packages') // 解析packages目录
 const packageDir =  path.resolve(packagesDir, process.env.TARGET) // 解析打包目录
 const resolve = p => path.resolve(packageDir, p) // resole封装
@@ -100,6 +102,7 @@ function createConfig(format, output, plugins = []) {
         modulesOnly: true
       }),
       tsPlugin,
+      createReplacePlugin(),
       babel({
         extensions,
         babelHelpers:'bundled',
@@ -116,5 +119,16 @@ function createProductionConfig(format) {
   return createConfig(format, {
     file: resolve(`dist/${name}.${format}.prod.js`),
     format: outputConfigs[format].format
+  })
+}
+
+// Replace strings in files while bundling 替换文件中的目标字符串
+function createReplacePlugin() {
+  const replacements = {
+    __VERSION__: `"${masterVersion}"`
+  }
+  return replace({
+    values: replacements,
+    preventAssignment: false
   })
 }

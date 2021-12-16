@@ -1,6 +1,5 @@
 import { RootRenderFunction } from './renderer'
 import { createVNode } from "./vnode";
-// import { version } from '.' // why???
 
 
 export type CreateAppFunction<HostElement> = (
@@ -28,11 +27,11 @@ export function createAppAPI<HostElement>(
       _uid: uid++,
       _component: rootComponent,
       _instance: null,
-      version: '1.0.0', // mini-dev-vue3的版本号
+      version: __VERSION__,
       mount(rootContainer) {
         // 创建根组件的vnode
         const vnode = createVNode(rootComponent);
-        // 用 render，基于 vnode 进行开箱
+        // 基于 vnode 进行渲染
         render(vnode, rootContainer);
       },
     };
