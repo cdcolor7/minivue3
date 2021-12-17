@@ -39,7 +39,11 @@ export interface RendererOptions<
   cloneNode?(node: HostNode): HostNode
 }
 
-
+type PatchFn = (
+  n1: VNode | null, // null means this is a mount
+  n2: VNode,
+  container: RendererElement,
+) => void
 
 export function createRenderer<
   HostNode = RendererNode,
@@ -58,12 +62,34 @@ function baseCreateRenderer(
         // unmount(container._vnode, null, null, true)
       }
     } else {
-      console.log('render start');
-      // patch(container._vnode || null, vnode, container, null, null, null, isSVG)
+      patch(null, vnode, container)
     }
     // flushPostFlushCbs()
     container._vnode = vnode
   }
+
+  const  patch:PatchFn = (n1, n2, container) => {
+    if (n1 === n2) {
+      return
+    }
+    console.log('patch start');
+    // const { type, ref, shapeFlag } = n2
+    // switch (type) {
+    //   case Text:
+    //     processText(n1, n2, container);
+    //     break;
+    //   case Fragment:
+    //     processFragment(n1, n2, container);
+    //     break;
+    //   default:
+    //     if (shapeFlag & ShapeFlags.ELEMENT) {
+    //       processElement(n1, n2, container);
+    //     } else if (shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
+    //       processComponent(n1, n2, container, parentComponent);
+    //     }
+    // }
+    }
+
   return {
     render,
     createApp: createAppAPI(render)
