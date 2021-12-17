@@ -72,7 +72,7 @@ function baseCreateRenderer(
     if (n1 === n2) {
       return
     }
-    console.log('patch start');
+    // console.log('patch start');
     // const { type, ref, shapeFlag } = n2
     // switch (type) {
     //   case Text:

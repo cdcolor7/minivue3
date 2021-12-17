@@ -12,6 +12,7 @@
     "allowJs": false,
     "skipLibCheck": true,
     "experimentalDecorators": true,
+    "noUnusedLocals": true,
     "paths":{
       "@mini-dev-vue3/*": ["packages/*/lib"],
       "mini-dev-vue3": ["packages/vue/lib"]

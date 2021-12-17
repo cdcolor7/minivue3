@@ -30,6 +30,6 @@ export function _createVNode(
   dynamicProps: string[] | null = null,
   isBlockNode = false
 ):any {
-  console.log('获取vnode基类函数');
+  // console.log('获取vnode基类函数');
   return 'vnode'
 }
