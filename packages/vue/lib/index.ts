@@ -3,14 +3,10 @@ import { isString, NOOP } from '@mini-dev-vue3/shared';
 import { compile } from '@mini-dev-vue3/compiler-dom'
 import * as runtimeDom from '@mini-dev-vue3/runtime-dom'
 
-/**
- * compileToFunction
- * any --->  RenderFunction
- */
 function compileToFunction(
   template: string | HTMLElement,
   options?: any
-): RenderFunction { // <----
+): RenderFunction {
 
   if (!isString(template)) {
     if (template.nodeType) {
