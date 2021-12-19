@@ -6,7 +6,7 @@ import * as runtimeDom from '@mini-dev-vue3/runtime-dom'
 function compileToFunction(
   template: string | HTMLElement,
   options?: any
-): RenderFunction {
+): any { // RenderFunction
 
   if (!isString(template)) {
     if (template.nodeType) {
@@ -22,18 +22,21 @@ function compileToFunction(
   }
 
   const  { code } = compile(template)
-
+  // 编译执行结果
   console.log(code);
 
 
-  const render = (
-    new Function('Vue', code)(runtimeDom)
-  ) as RenderFunction
+  // const render = (
+  //   new Function('Vue', code)(runtimeDom)
+  // ) as RenderFunction
 
-  console.log(render);
+  // console.log(render);
 
-  return render
+  // return render
 }
+
+// 模板编译 --  仅限开发测试使用
+compileToFunction('#app')
 
 export { compileToFunction as compile }
 export * from '@mini-dev-vue3/runtime-dom'

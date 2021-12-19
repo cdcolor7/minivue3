@@ -23,13 +23,12 @@ export const createApp = ((...args) => {
   app.mount = (containerOrSelector: string): any => {
     const container = normalizeContainer(containerOrSelector)
     if (!container) return
-    // mount 功能拓展
-    // ....
     const proxy = mount(container)
     return proxy
   }
   return app
 }) as CreateAppFunction<Element>
+
 
 function normalizeContainer(
   container: string

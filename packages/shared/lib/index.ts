@@ -1,6 +1,7 @@
 export * from './patchFlags'
 export * from './shapeFlags'
 export * from './slotFlags'
+export * from './domTagConfig'
 
 export const NOOP = () => {}
 

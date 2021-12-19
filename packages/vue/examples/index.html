@@ -7,17 +7,28 @@
   <title>mini-dev-vue3</title>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <h1>{{ msg }}</h1>
+    <div>hello mini dev vue3 !!</div>
+    <child-comp></child-comp>
+  </div>
   <script src="../dist/vue.global.js"></script>
   <script>
     const { createApp } = Vue
     const app = createApp({
+      components: {
+        childComp: {
+          template: '<div>comp</div>'
+        }
+      },
       setup() {
-        console.log('hello setup');
+        // console.log('hello setup');
       }
     })
     app.mount('#app')
-    console.log(app);
+    // console.log(`-----app实例对象 start----`);
+    // console.log(app);
+    // console.log(`-----app实例对象 end----`);
   </script>
 </body>
 </html>
