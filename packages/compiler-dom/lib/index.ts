@@ -1,18 +1,21 @@
-import { isHTMLTag, isSVGTag, isVoidTag } from "@mini-dev-vue3/shared";
+import {
+  baseCompile,
+  // baseParse,
+  // CompilerOptions,
+  // CodegenResult,
+  // ParserOptions,
+  // RootNode,
+  // noopDirectiveTransform,
+  // NodeTransform,
+  // DirectiveTransform
+} from '@mini-dev-vue3/compiler-core'
+
 
 export function compile(
     template: string,
     // options: CompilerOptions = {}
-  ) {
-    // TODO
-    console.log(isHTMLTag);
-    console.log(isSVGTag);
-    console.log(isVoidTag);
-    
-    console.log(template);
-    
-    const code = 'render'
-    return {
-        code
-    }
+  ): any {  // CodegenResult
+    return baseCompile(template)
 }
+
+export * from '@mini-dev-vue3/compiler-core'

@@ -125,6 +125,7 @@ function createProductionConfig(format) {
 // Replace strings in files while bundling 替换文件中的目标字符串
 function createReplacePlugin() {
   const replacements = {
+    __DEV__: true,
     __VERSION__: `"${masterVersion}"`
   }
   return replace({
