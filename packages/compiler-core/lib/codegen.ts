@@ -133,4 +133,3 @@ export interface CodegenResult {
 //     map: context.map ? (context.map as any).toJSON() : undefined
 //   }
 // }
-

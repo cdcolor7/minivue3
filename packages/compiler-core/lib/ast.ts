@@ -95,11 +95,11 @@ export type TemplateTextChildNode =
 export interface SlotFunctionExpression extends FunctionExpression {
   returns: TemplateChildNode[]
 }
-    
+
 export interface SlotsObjectProperty extends Property {
   value: SlotFunctionExpression
 }
-    
+
 export interface SlotsObjectExpression extends ObjectExpression {
   properties: SlotsObjectProperty[]
 }
@@ -134,9 +134,9 @@ export interface DynamicSlotsExpression extends CallExpression {
   callee: typeof CREATE_SLOTS
   arguments: [SlotsObjectExpression, DynamicSlotEntries]
 }
-      
+
 export type SlotsExpression = SlotsObjectExpression | DynamicSlotsExpression
-  
+
 export interface RenderSlotCall extends CallExpression {
   callee: typeof RENDER_SLOT
   arguments: // $slots, name, props, fallback
@@ -273,7 +273,7 @@ export interface BaseElementNode extends Node {
   props: Array<AttributeNode | DirectiveNode>
   children: TemplateChildNode[]
 }
-   
+
 export interface TemplateLiteral extends Node {
   type: NodeTypes.JS_TEMPLATE_LITERAL
   elements: (string | JSChildNode)[]
@@ -289,7 +289,7 @@ export interface PlainElementNode extends BaseElementNode {
     | undefined
   ssrCodegenNode?: TemplateLiteral
 }
-  
+
 export interface ComponentNode extends BaseElementNode {
   tagType: ElementTypes.COMPONENT
   codegenNode:
@@ -314,12 +314,12 @@ export interface TemplateNode extends BaseElementNode {
   // TemplateNode is a container type that always gets compiled away
   codegenNode: undefined
 }
-    
+
 export type ElementNode =
-| PlainElementNode
-| ComponentNode
-| SlotOutletNode
-| TemplateNode
+  | PlainElementNode
+  | ComponentNode
+  | SlotOutletNode
+  | TemplateNode
 
 export interface CommentNode extends Node {
   type: NodeTypes.COMMENT
@@ -335,12 +335,12 @@ export interface IfNode extends Node {
 interface MemoFactory extends FunctionExpression {
   returns: BlockCodegenNode
 }
-  
+
 export interface MemoExpression extends CallExpression {
   callee: typeof WITH_MEMO
   arguments: [ExpressionNode, MemoFactory, string, string]
 }
-  
+
 export interface IfConditionalExpression extends ConditionalExpression {
   consequent: BlockCodegenNode | MemoExpression
   alternate: BlockCodegenNode | IfConditionalExpression | MemoExpression
@@ -363,7 +363,7 @@ export interface DirectiveNode extends Node {
    */
   parseResult?: ForParseResult
 }
-  
+
 export interface IfBranchNode extends Node {
   type: NodeTypes.IF_BRANCH
   condition: ExpressionNode | undefined // else
@@ -379,7 +379,7 @@ export interface ForCodegenNode extends VNodeCall {
   patchFlag: string
   disableTracking: boolean
 }
-  
+
 export interface ForNode extends Node {
   type: NodeTypes.FOR
   source: ExpressionNode
@@ -396,18 +396,17 @@ export interface TextCallNode extends Node {
   content: TextNode | InterpolationNode | CompoundExpressionNode
   codegenNode: CallExpression | SimpleExpressionNode // when hoisted
 }
-  
-    
+
 export type TemplateChildNode =
-| ElementNode
-| InterpolationNode
-| CompoundExpressionNode
-| TextNode
-| CommentNode
-| IfNode
-| IfBranchNode
-| ForNode
-| TextCallNode
+  | ElementNode
+  | InterpolationNode
+  | CompoundExpressionNode
+  | TextNode
+  | CommentNode
+  | IfNode
+  | IfBranchNode
+  | ForNode
+  | TextCallNode
 
 export const enum ConstantTypes {
   NOT_CONSTANT = 0,
@@ -415,7 +414,6 @@ export const enum ConstantTypes {
   CAN_HOIST,
   CAN_STRINGIFY
 }
-
 
 export interface SimpleExpressionNode extends Node {
   type: NodeTypes.SIMPLE_EXPRESSION
@@ -444,7 +442,7 @@ export interface TextNode extends Node {
   type: NodeTypes.TEXT
   content: string
 }
-    
+
 export interface CompoundExpressionNode extends Node {
   type: NodeTypes.COMPOUND_EXPRESSION
   children: (
@@ -463,7 +461,7 @@ export interface CompoundExpressionNode extends Node {
   identifiers?: string[]
   isHandlerKey?: boolean
 }
-    
+
 export type ExpressionNode = SimpleExpressionNode | CompoundExpressionNode
 
 export interface ReturnStatement extends Node {
@@ -482,7 +480,7 @@ export interface BlockStatement extends Node {
   type: NodeTypes.JS_BLOCK_STATEMENT
   body: (JSChildNode | IfStatement)[]
 }
-  
+
 export interface RootNode extends Node {
   type: NodeTypes.ROOT
   children: TemplateChildNode[]
@@ -500,3 +498,27 @@ export interface RootNode extends Node {
   filters?: string[]
 }
 
+export const locStub: SourceLocation = {
+  source: '',
+  start: { line: 1, column: 1, offset: 0 },
+  end: { line: 1, column: 1, offset: 0 }
+}
+
+export function createRoot(
+  children: TemplateChildNode[],
+  loc = locStub
+): RootNode {
+  return {
+    type: NodeTypes.ROOT,
+    children,
+    helpers: [],
+    components: [],
+    directives: [],
+    hoists: [],
+    imports: [],
+    cached: 0,
+    temps: 0,
+    codegenNode: undefined,
+    loc
+  }
+}
