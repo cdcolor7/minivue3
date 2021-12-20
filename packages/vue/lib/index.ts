@@ -1,12 +1,10 @@
 // import { RenderFunction } from '@mini-dev-vue3/runtime-core'
-import { isString, NOOP } from '@mini-dev-vue3/shared';
+import { isString, NOOP } from '@mini-dev-vue3/shared'
 import { compile } from '@mini-dev-vue3/compiler-dom'
 // import * as runtimeDom from '@mini-dev-vue3/runtime-dom'
 
-function compileToFunction(
-  template: string | HTMLElement,
-  options?: any
-): any { // RenderFunction
+function compileToFunction(template: string | HTMLElement, options?: any): any {
+  // RenderFunction
 
   if (!isString(template)) {
     if (template.nodeType) {
@@ -21,10 +19,9 @@ function compileToFunction(
     template = el ? el.innerHTML : ``
   }
 
-  const  ret = compile(template)
+  const ret = compile(template)
   // 编译执行结果
-  console.log(ret);
-
+  console.log(ret)
 
   // const render = (
   //   new Function('Vue', code)(runtimeDom)
