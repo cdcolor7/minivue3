@@ -1,23 +1,66 @@
 // import { RootNode } from './ast';
-import { createRoot, ElementTypes, NodeTypes } from './ast'
+import { extend, isArray, NO } from '@mini-dev-vue3/shared'
+import {
+  createRoot,
+  ElementTypes,
+  NodeTypes,
+  ElementNode,
+  Namespaces
+} from './ast'
 
 const enum TagType {
   Start,
   End
 }
 
+export const enum TextModes {
+  //          | Elements | Entities | End sign              | Inside of
+  DATA, //    | ✔        | ✔        | End tags of ancestors |
+  RCDATA, //  | ✘        | ✔        | End tag of the parent | <textarea>
+  RAWTEXT, // | ✘        | ✘        | End tag of the parent | <style>,<script>
+  CDATA,
+  ATTRIBUTE_VALUE
+}
+
 export function baseParse(content: string): any {
   const context = createParserContext(content)
-  return createRoot(parseChildren(context))
+  return createRoot(parseChildren(context, TextModes.DATA, []))
+}
+
+const decodeRE = /&(gt|lt|amp|apos|quot);/g
+const decodeMap: Record<string, string> = {
+  gt: '>',
+  lt: '<',
+  amp: '&',
+  apos: "'",
+  quot: '"'
+}
+
+export const defaultParserOptions: any = {
+  delimiters: [`{{`, `}}`],
+  getNamespace: () => Namespaces.HTML,
+  getTextMode: () => TextModes.DATA,
+  isVoidTag: NO,
+  isPreTag: NO,
+  isCustomElement: NO,
+  decodeEntities: (rawText: string): string =>
+    rawText.replace(decodeRE, (_, p1) => decodeMap[p1])
 }
 
 function createParserContext(content: string) {
+  const options = extend({}, defaultParserOptions)
   return {
+    options,
     source: content
   }
 }
 
-function parseChildren(context: any) {
+function parseChildren(
+  context: any,
+  mode: TextModes,
+  ancestors: ElementNode[]
+) {
+  const parent = last(ancestors)
   const nodes: any = []
 
   while (!isEnd(context)) {
@@ -30,7 +73,10 @@ function parseChildren(context: any) {
     } else if (s[0] === '<') {
       if (s[1] === '/') {
         // 处理结束标签
-        if (/[a-z]/i.test(s[2])) {
+        if (s[2] === '>') {
+          advanceBy(context, 3)
+          continue
+        } else if (/[a-z]/i.test(s[2])) {
           // 匹配 </div>
           // 需要改变 context.source 的值 -> 也就是需要移动光标
           parseTag(context, TagType.End)
@@ -38,18 +84,79 @@ function parseChildren(context: any) {
           continue
         }
       } else if (/[a-z]/i.test(s[1])) {
-        node = parseElement(context)
+        node = parseElement(context, ancestors)
       }
     }
 
     if (!node) {
-      node = parseText(context)
+      node = parseText(context, mode)
     }
 
-    nodes.push(node)
+    if (isArray(node)) {
+      for (let i = 0; i < node.length; i++) {
+        nodes.push(node[i])
+      }
+    } else {
+      nodes.push(node)
+    }
   }
 
-  return nodes
+  let removedWhitespace = false
+  if (mode !== TextModes.RAWTEXT && mode !== TextModes.RCDATA) {
+    const shouldCondense = context.options.whitespace !== 'preserve'
+    for (let i = 0; i < nodes.length; i++) {
+      const node = nodes[i]
+      if (!context.inPre && node.type === NodeTypes.TEXT) {
+        if (!/[^\t\r\n\f ]/.test(node.content)) {
+          const prev = nodes[i - 1]
+          const next = nodes[i + 1]
+          // Remove if:
+          // - the whitespace is the first or last node, or:
+          // - (condense mode) the whitespace is adjacent to a comment, or:
+          // - (condense mode) the whitespace is between two elements AND contains newline
+          if (
+            !prev ||
+            !next ||
+            (shouldCondense &&
+              (prev.type === NodeTypes.COMMENT ||
+                next.type === NodeTypes.COMMENT ||
+                (prev.type === NodeTypes.ELEMENT &&
+                  next.type === NodeTypes.ELEMENT &&
+                  /[\r\n]/.test(node.content))))
+          ) {
+            removedWhitespace = true
+            nodes[i] = null as any
+          } else {
+            // Otherwise, the whitespace is condensed into a single space
+            node.content = ' '
+          }
+        } else if (shouldCondense) {
+          // in condense mode, consecutive whitespaces in text are condensed
+          // down to a single space.
+          node.content = node.content.replace(/[\t\r\n\f ]+/g, ' ')
+        }
+      }
+      // Remove comment nodes if desired by configuration.
+      else if (node.type === NodeTypes.COMMENT && !context.options.comments) {
+        removedWhitespace = true
+        nodes[i] = null as any
+      }
+    }
+    if (context.inPre && parent && context.options.isPreTag(parent.tag)) {
+      // remove leading newline per html spec
+      // https://html.spec.whatwg.org/multipage/grouping-content.html#the-pre-element
+      const first = nodes[0]
+      if (first && first.type === NodeTypes.TEXT) {
+        first.content = first.content.replace(/^\r?\n/, '')
+      }
+    }
+  }
+
+  return removedWhitespace ? nodes.filter(Boolean) : nodes
+}
+
+function last<T>(xs: T[]): T | undefined {
+  return xs[xs.length - 1]
 }
 
 function isEnd(context: any) {
@@ -57,22 +164,23 @@ function isEnd(context: any) {
   return !context.source
 }
 
-function parseText(context: any): any {
+function parseText(context: any, mode: TextModes): any {
   // endIndex 应该看看有没有对应的 <
   // 比如 hello</div>
   // 像这种情况下 endIndex 就应该是在 o 这里
   // {
-  const endTokens = ['<', '{{']
+  const endTokens =
+    mode === TextModes.CDATA ? [']]>'] : ['<', context.options.delimiters[0]]
   let endIndex = context.source.length
 
   for (let i = 0; i < endTokens.length; i++) {
-    const index = context.source.indexOf(endTokens[i])
-    if (index !== -1) {
+    const index = context.source.indexOf(endTokens[i], 1)
+    if (index !== -1 && endIndex > index) {
       endIndex = index
     }
   }
 
-  const content = parseTextData(context, endIndex)
+  const content = parseTextData(context, endIndex, mode)
 
   return {
     type: NodeTypes.TEXT,
@@ -80,23 +188,32 @@ function parseText(context: any): any {
   }
 }
 
-function parseTextData(context: any, length: number): any {
-  // 1. 直接返回 context.source
-  // 从 length 切的话，是为了可以获取到 text 的值（需要用一个范围来确定）
+function parseTextData(context: any, length: number, mode?: TextModes): any {
   const rawText = context.source.slice(0, length)
-  // 2. 移动光标
   advanceBy(context, length)
-
-  return rawText
+  if (
+    mode === TextModes.RAWTEXT ||
+    mode === TextModes.CDATA ||
+    rawText.indexOf('&') === -1
+  ) {
+    return rawText
+  } else {
+    // DATA or RCDATA containing "&"". Entity decoding required.
+    return context.options.decodeEntities(
+      rawText,
+      mode === TextModes.ATTRIBUTE_VALUE
+    )
+  }
 }
 
-function parseElement(context: any) {
+function parseElement(context: any, ancestors: ElementNode[]) {
   // 应该如何解析 tag 呢
   // <div></div>
   // 先解析开始 tag
   const element = parseTag(context, TagType.Start)
-
-  const children = parseChildren(context)
+  ancestors.push(element)
+  const mode = context.options.getTextMode(element, parent)
+  const children = parseChildren(context, mode, ancestors)
 
   // 解析 end tag 是为了检测语法是不是正确的
   // 检测是不是和 start tag 一致
