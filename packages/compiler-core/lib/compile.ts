@@ -9,7 +9,7 @@ export function baseCompile(
   // options: CompilerOptions = {}
 ): any {
   const ast = isString(template) ? baseParse(template) : template
-  transform(ast)
+  // transform(ast)
   return ast
   // return generate(
   //   ast
