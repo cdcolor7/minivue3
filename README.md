@@ -52,8 +52,8 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 - [✖️] 支持 Text 类型节点
 - [✖️] 支持 $el api
 #### compiler-core
-- [✖️] Parse AST的实现
-- [✖️] Transform AST优化
+- [✔️] Parse AST的实现
+- [✔️] Transform AST优化
 - [✖️] Codegen 生成render函数
 #### compiler-dom
 - [✖️] compiler 浏览器编译模块

@@ -5,11 +5,11 @@ import { baseParse } from './parse'
 import { isString } from '@mini-dev-vue3/shared'
 
 export function baseCompile(
-  template: string | RootNode
-  // options: CompilerOptions = {}
+  template: string | RootNode,
+  options: any = {}
 ): any {
   const ast = isString(template) ? baseParse(template) : template
-  // transform(ast)
+  transform(ast)
   return ast
   // return generate(
   //   ast

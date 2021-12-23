@@ -1,64 +1,85 @@
-import { ExpressionNode, NodeTypes } from './ast'
-import { TO_DISPLAY_STRING } from './runtimeHelpers'
+import { isArray, isString } from '@mini-dev-vue3/shared'
+import { ExpressionNode, NodeTypes, RootNode } from './ast'
+import { TO_DISPLAY_STRING, CREATE_COMMENT } from './runtimeHelpers'
 export interface ImportItem {
   exp: string | ExpressionNode
   path: string
 }
 
-export function transform(root: any, options = {}) {
-  // 1. 创建 context
-
+export function transform(root: RootNode, options: any = {}) {
   const context = createTransformContext(root, options)
-
-  // 2. 遍历 node
   traverseNode(root, context)
-
-  root.helpers.push(...context.helpers.keys())
-}
-
-function traverseNode(node: any, context: any) {
-  const type: NodeTypes = node.type
-
-  // 遍历调用所有的 nodeTransforms
-  // 把 node 给到 transform
-  // 用户可以对 node 做处理
-  const nodeTransforms = context.nodeTransforms
-
-  for (let i = 0; i < nodeTransforms.length; i++) {
-    const transform = nodeTransforms[i]
-    // TODO transform 可以返回一个函数， 作为 exit 的时候调用
-    transform(node, context)
+  // if (options.hoistStatic) {
+  //   hoistStatic(root, context)
+  // }
+  if (!options.ssr) {
+    createRootCodegen(root, context)
   }
-
-  switch (type) {
-    case NodeTypes.INTERPOLATION:
-      // 插值的点，在于后续生成 render 代码的时候是获取变量的值
-      context.helper(TO_DISPLAY_STRING)
-      break
-
-    case NodeTypes.ROOT:
-    case NodeTypes.ELEMENT:
-      traverseChildren(node, context)
-      break
-
-    default:
-      break
-  }
+  // finalize meta information
+  root.helpers = [...context.helpers.keys()]
+  root.components = [...context.components]
+  root.hoists = context.hoists
 }
 
-function traverseChildren(parent: any, context: any) {
-  // node.children
-  parent.children.forEach((node: any) => {
-    // TODO 需要设置 context 的值
-    traverseNode(node, context)
-  })
-}
+// function createRootCodegen(root: RootNode, context: any) {
+//   const { helper } = context
+//   const { children } = root
+//   if (children.length === 1) {
+//     const child = children[0]
+//     // if the single child is an element, turn it into a block.
+//     if (isSingleElementRoot(root, child) && child.codegenNode) {
+//       // single element root is never hoisted so codegenNode will never be
+//       // SimpleExpressionNode
+//       const codegenNode = child.codegenNode
+//       if (codegenNode.type === NodeTypes.VNODE_CALL) {
+//         makeBlock(codegenNode, context)
+//       }
+//       root.codegenNode = codegenNode
+//     } else {
+//       // - single <slot/>, IfNode, ForNode: already blocks.
+//       // - single text node: always patched.
+//       // root codegen falls through via genNode()
+//       root.codegenNode = child
+//     }
+//   } else if (children.length > 1) {
+//     // root has multiple nodes - return a fragment block.
+//     let patchFlag = PatchFlags.STABLE_FRAGMENT
+//     let patchFlagText = PatchFlagNames[PatchFlags.STABLE_FRAGMENT]
+//     // check if the fragment actually contains a single valid child with
+//     // the rest being comments
+//     if (
+//       __DEV__ &&
+//       children.filter(c => c.type !== NodeTypes.COMMENT).length === 1
+//     ) {
+//       patchFlag |= PatchFlags.DEV_ROOT_FRAGMENT
+//       patchFlagText += `, ${PatchFlagNames[PatchFlags.DEV_ROOT_FRAGMENT]}`
+//     }
+//     root.codegenNode = createVNodeCall(
+//       context,
+//       helper(FRAGMENT),
+//       undefined,
+//       root.children,
+//       patchFlag + (__DEV__ ? ` /* ${patchFlagText} */` : ``),
+//       undefined,
+//       undefined,
+//       true,
+//       undefined,
+//       false /* isComponent */
+//     )
+//   } else {
+//     // no children = noop. codegen will return null.
+//   }
+// }
 
-function createTransformContext(root: any, options: any): any {
+function createTransformContext(root: RootNode, options: any): any {
   const context = {
     root,
     nodeTransforms: options.nodeTransforms || [],
     helpers: new Map(),
+    components: new Set(),
+    directives: new Set(),
+    hoists: [],
+    imports: [],
     helper(name: any) {
       // 这里会收集调用的次数
       // TODO 但是为什么收集次数呢？
@@ -69,4 +90,79 @@ function createTransformContext(root: any, options: any): any {
   }
 
   return context
+}
+
+export function traverseNode(node: any, context: any) {
+  context.currentNode = node
+  // apply transform plugins
+  const { nodeTransforms } = context
+  const exitFns = []
+  for (let i = 0; i < nodeTransforms.length; i++) {
+    const onExit = nodeTransforms[i](node, context)
+    if (onExit) {
+      if (isArray(onExit)) {
+        exitFns.push(...onExit)
+      } else {
+        exitFns.push(onExit)
+      }
+    }
+    if (!context.currentNode) {
+      // node was removed
+      return
+    } else {
+      // node may have been replaced
+      node = context.currentNode
+    }
+  }
+
+  switch (node.type) {
+    case NodeTypes.COMMENT:
+      if (!context.ssr) {
+        // inject import for the Comment symbol, which is needed for creating
+        // commentimport { RootNode } from '@mini-dev-vue3/compiler-dom';
+        context.helper(CREATE_COMMENT)
+      }
+      break
+    case NodeTypes.INTERPOLATION:
+      // no need to traverse, but we need to inject toString helper
+      if (!context.ssr) {
+        context.helper(TO_DISPLAY_STRING)
+      }
+      break
+
+    // for container types, further traverse downwards
+    case NodeTypes.IF:
+      for (let i = 0; i < node.branches.length; i++) {
+        traverseNode(node.branches[i], context)
+      }
+      break
+    case NodeTypes.IF_BRANCH:
+    case NodeTypes.FOR:
+    case NodeTypes.ELEMENT:
+    case NodeTypes.ROOT:
+      traverseChildren(node, context)
+      break
+  }
+
+  // exit transforms
+  context.currentNode = node
+  let i = exitFns.length
+  while (i--) {
+    exitFns[i]()
+  }
+}
+
+export function traverseChildren(parent: ParentNode, context: any) {
+  let i = 0
+  const nodeRemoved = () => {
+    i--
+  }
+  for (; i < parent.children.length; i++) {
+    const child = parent.children[i]
+    if (isString(child)) continue
+    context.parent = parent
+    context.childIndex = i
+    context.onNodeRemoved = nodeRemoved
+    traverseNode(child, context)
+  }
 }

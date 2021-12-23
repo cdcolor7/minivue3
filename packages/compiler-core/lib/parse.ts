@@ -88,8 +88,6 @@ function parseChildren(
             continue
           }
         } else if (/[a-z]/i.test(s[1])) {
-          console.log(s[1])
-
           node = parseElement(context, ancestors)
         }
       }
@@ -117,10 +115,6 @@ function parseChildren(
         if (!/[^\t\r\n\f ]/.test(node.content)) {
           const prev = nodes[i - 1]
           const next = nodes[i + 1]
-          // Remove if:
-          // - the whitespace is the first or last node, or:
-          // - (condense mode) the whitespace is adjacent to a comment, or:
-          // - (condense mode) the whitespace is between two elements AND contains newline
           if (
             !prev ||
             !next ||
@@ -134,24 +128,17 @@ function parseChildren(
             removedWhitespace = true
             nodes[i] = null as any
           } else {
-            // Otherwise, the whitespace is condensed into a single space
             node.content = ' '
           }
         } else if (shouldCondense) {
-          // in condense mode, consecutive whitespaces in text are condensed
-          // down to a single space.
           node.content = node.content.replace(/[\t\r\n\f ]+/g, ' ')
         }
-      }
-      // Remove comment nodes if desired by configuration.
-      else if (node.type === NodeTypes.COMMENT && !context.options.comments) {
+      } else if (node.type === NodeTypes.COMMENT && !context.options.comments) {
         removedWhitespace = true
         nodes[i] = null as any
       }
     }
     if (context.inPre && parent && context.options.isPreTag(parent.tag)) {
-      // remove leading newline per html spec
-      // https://html.spec.whatwg.org/multipage/grouping-content.html#the-pre-element
       const first = nodes[0]
       if (first && first.type === NodeTypes.TEXT) {
         first.content = first.content.replace(/^\r?\n/, '')
@@ -325,7 +312,7 @@ function isComponent(
     return false
   }
   const isNativeTag = isHTMLTag(tag) || isSVGTag(tag)
-  if (tag === 'component' || /^[A-Z]/.test(tag) || isNativeTag) {
+  if (tag === 'component' || /^[A-Z]/.test(tag) || !isNativeTag) {
     return true
   }
 }
