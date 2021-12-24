@@ -81,9 +81,6 @@ function createTransformContext(root: RootNode, options: any): any {
     hoists: [],
     imports: [],
     helper(name: any) {
-      // 这里会收集调用的次数
-      // TODO 但是为什么收集次数呢？
-      // helpers 数据会在后续生成代码的时候用到
       const count = context.helpers.get(name) || 0
       context.helpers.set(name, count + 1)
     }

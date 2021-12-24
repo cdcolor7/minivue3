@@ -1,4 +1,9 @@
-import { Renderer, createRenderer, CreateAppFunction } from '@mini-dev-vue3/runtime-core'
+export * from '@mini-dev-vue3/reactivity'
+import {
+  Renderer,
+  createRenderer,
+  CreateAppFunction
+} from '@mini-dev-vue3/runtime-core'
 import { isString } from '@mini-dev-vue3/shared'
 import { nodeOps } from './nodeOps'
 
@@ -11,14 +16,11 @@ const rendererOptions = nodeOps
 let renderer: Renderer<Element>
 
 function ensureRenderer() {
-  return (
-    renderer ||
-    (renderer = createRenderer(rendererOptions))
-  )
+  return renderer || (renderer = createRenderer(rendererOptions))
 }
-  
+
 export const createApp = ((...args) => {
-  const app = ensureRenderer().createApp(...args) 
+  const app = ensureRenderer().createApp(...args)
   const { mount } = app
   app.mount = (containerOrSelector: string): any => {
     const container = normalizeContainer(containerOrSelector)
@@ -29,10 +31,7 @@ export const createApp = ((...args) => {
   return app
 }) as CreateAppFunction<Element>
 
-
-function normalizeContainer(
-  container: string
-): Element | null {
+function normalizeContainer(container: string): Element | null {
   if (isString(container)) {
     const res = document.querySelector(container)
     if (!res) {
@@ -43,5 +42,4 @@ function normalizeContainer(
     return res
   }
   return container as any
-  }
-  
+}
