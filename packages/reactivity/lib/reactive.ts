@@ -1,8 +1,10 @@
+import { def } from '@mini-dev-vue3/shared'
+
 export const enum ReactiveFlags {
-  SKIP = '__v_skip',
-  IS_REACTIVE = '__v_isReactive',
-  IS_READONLY = '__v_isReadonly',
-  RAW = '__v_raw'
+  SKIP = '__v_skip', // 标记一个对象，使其永远不会转换为 proxy
+  IS_REACTIVE = '__v_isReactive', // 标记一个对象，由 reactive 创建的响应式代理
+  IS_READONLY = '__v_isReadonly', // 标记一个对象，由 readonly 创建的只读代理
+  RAW = '__v_raw' // 保存代理对象的原始对象
 }
 
 export interface Target {
@@ -12,6 +14,7 @@ export interface Target {
   [ReactiveFlags.RAW]?: any
 }
 
+//  reactive 函数实现
 export function reactive(target: object) {
   return createReactiveObject(target)
 }
@@ -49,3 +52,15 @@ export function toRaw<T>(observed: T): T {
   const raw = observed && (observed as Target)[ReactiveFlags.RAW]
   return raw ? toRaw(raw) : observed
 }
+
+// 标记一个对象，使其永远不会转换为 proxy。返回对象本身。
+export function markRaw<T extends object>(value: T): T {
+  def(value, ReactiveFlags.SKIP, true)
+  return value
+}
+
+// export const toReactive = <T extends unknown>(value: T): T =>
+//   isObject(value) ? reactive(value) : value
+
+// export const toReadonly = <T extends unknown>(value: T): T =>
+//   isObject(value) ? readonly(value as Record<any, any>) : value
