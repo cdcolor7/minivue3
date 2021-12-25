@@ -53,6 +53,10 @@ export const toHandlerKey = (str: string) => {
   return str ? `on${capitalize(str)}` : ``
 }
 
+// compare whether a value has changed, accounting for NaN.
+export const hasChanged = (value: any, oldValue: any): boolean =>
+  !Object.is(value, oldValue)
+
 export const def = (obj: object, key: string | symbol, value: any) => {
   Object.defineProperty(obj, key, {
     configurable: true,

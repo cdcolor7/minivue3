@@ -33,7 +33,7 @@ function compileToFunction(template: string | HTMLElement, options?: any): any {
 }
 
 // 模板编译 --  仅限开发测试使用
-compileToFunction('#app')
+// compileToFunction('#app')
 
 export { compileToFunction as compile }
 export * from '@mini-dev-vue3/runtime-dom'
