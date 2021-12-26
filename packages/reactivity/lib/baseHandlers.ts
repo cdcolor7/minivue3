@@ -47,27 +47,20 @@ export const readonlyHandlers: ProxyHandler<object> = {
 }
 
 // 对象浅层proxy
-export const shallowReactiveHandlers = /*#__PURE__*/ extend(
-  {},
-  mutableHandlers,
-  {
-    get: shallowGet,
-    set: shallowSet
-  }
-)
+export const shallowReactiveHandlers = extend({}, mutableHandlers, {
+  get: shallowGet,
+  set: shallowSet
+})
 
 // 对象浅层proxy -- readonly
-export const shallowReadonlyHandlers = /*#__PURE__*/ extend(
-  {},
-  readonlyHandlers,
-  {
-    get: shallowReadonlyGet
-  }
-)
+export const shallowReadonlyHandlers = extend({}, readonlyHandlers, {
+  get: shallowReadonlyGet
+})
 
 // 实现 readonly只读  shallow 浅代理 深层代码
 function createGetter(isReadonly = false, shallow = false) {
   return function get(target: Target, key: string) {
+    // IS_REACTIVE IS_READONLY RAW属性的值返回
     if (key === ReactiveFlags.IS_REACTIVE) {
       return !isReadonly
     } else if (key === ReactiveFlags.IS_READONLY) {
@@ -76,6 +69,7 @@ function createGetter(isReadonly = false, shallow = false) {
       return target
     }
     const res = Reflect.get(target, key)
+    console.log(`get: ${key}`)
     // if (!isReadonly) {
     //   track(target, TrackOpTypes.GET, key)
     // }
@@ -97,6 +91,7 @@ function createSetter(shallow = false) {
       ? Number(key) < target.length
       : hasOwn(target, key)
     const result = Reflect.set(target, key, value)
+    console.log(`set: ${key}`)
     if (!hadKey) {
       // trigger(target, TriggerOpTypes.ADD, key, value)
     } else if (hasChanged(value, oldValue)) {
@@ -111,6 +106,7 @@ function deleteProperty(target: object, key: string): boolean {
   const hadKey = hasOwn(target, key)
   // const oldValue = (target as any)[key]
   const result = Reflect.deleteProperty(target, key)
+  console.log(`del: ${key}`)
   if (result && hadKey) {
     // trigger(target, TriggerOpTypes.DELETE, key, undefined, oldValue)
   }

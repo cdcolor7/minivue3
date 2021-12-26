@@ -88,6 +88,11 @@ function createReactiveObject(
     return existingProxy
   }
 
+  // 过滤__v_skip标记对象（使其永远不会转换为 proxy）
+  if (target[ReactiveFlags.SKIP]) {
+    return target
+  }
+
   const proxy = new Proxy(target, baseHandlers)
 
   // 原始对象和代理后的对象之间的建立映射关系
@@ -125,8 +130,8 @@ export function markRaw<T extends object>(value: T): T {
   return value
 }
 
-// export const toReactive = <T extends unknown>(value: T): T =>
-//   isObject(value) ? reactive(value) : value
+export const toReactive = <T extends unknown>(value: T): T =>
+  isObject(value) ? reactive(value) : value
 
-// export const toReadonly = <T extends unknown>(value: T): T =>
-//   isObject(value) ? readonly(value as Record<any, any>) : value
+export const toReadonly = <T extends unknown>(value: T): T =>
+  isObject(value) ? readonly(value as Record<any, any>) : value

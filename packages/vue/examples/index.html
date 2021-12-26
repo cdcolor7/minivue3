@@ -14,7 +14,7 @@
   </div>
   <script src="../dist/vue.global.js"></script>
   <script>
-    const { createApp } = Vue
+    const { createApp, reactive, isReactive, isReadonly, readonly, isProxy, toRaw, shallowReactive, markRaw } = Vue
     const app = createApp({
       components: {
         childComp: {
@@ -26,6 +26,22 @@
       }
     })
     app.mount('#app')
+
+    let obj = markRaw({
+      a:1,
+    })
+
+    let obj1 = reactive(obj)
+
+    obj1.b = 2
+
+    // let obj2 = shallowReactive({
+    //   y:1,
+    //   bar: {
+    //     foo: 'foo'
+    //   }
+    // })
+    
     // console.log(`-----app实例对象 start----`);
     // console.log(app);
     // console.log(`-----app实例对象 end----`);
