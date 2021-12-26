@@ -20,7 +20,7 @@ export type VNodeTypes =
   | typeof Text
   | typeof Fragment
 
-export const createVNode = (_createVNode) as typeof _createVNode
+export const createVNode = _createVNode as typeof _createVNode
 
 export function _createVNode(
   type: VNodeTypes,
@@ -29,7 +29,7 @@ export function _createVNode(
   patchFlag: number = 0,
   dynamicProps: string[] | null = null,
   isBlockNode = false
-):any {
+): any {
   // console.log('获取vnode基类函数');
   return 'vnode'
 }

@@ -30,5 +30,8 @@
   },
   "scripts": {
     "test": "jest"
+  },
+  "dependencies": {
+    "@mini-dev-vue3/shared": "^1.0.0"
   }
 }

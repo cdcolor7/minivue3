@@ -27,5 +27,8 @@
   "scripts": {
     "test": "jest"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "dependencies": {
+    "@mini-dev-vue3/shared": "^1.0.0"
+  }
 }
