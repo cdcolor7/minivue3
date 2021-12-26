@@ -5,9 +5,9 @@ import {
   RENDER_SLOT,
   CREATE_SLOTS,
   RENDER_LIST,
-  OPEN_BLOCK,
+  // OPEN_BLOCK,
   FRAGMENT,
-  WITH_DIRECTIVES,
+  // WITH_DIRECTIVES,
   WITH_MEMO
 } from './runtimeHelpers'
 
