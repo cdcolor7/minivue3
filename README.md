@@ -10,12 +10,12 @@ yarn # 必须
 ```
 
 ### 开发
-开发文件测试目录：./packages/vue/examples/
+测试范例文档目录：./packages/vue/examples/
 ``` bash
 yarn dev <name> -s  # '<name>打包目标[为空默认vue,]'; -s '是否开启souceMap'
 ```
 ### 启动docs
-vue3源码详细说明，lerna、pnpm、rollup相关使用说明。
+vue3源码详细说明文档、lerna、pnpm、rollup相关使用说明。
 ``` bash
 yarn doc:dev
 ```
@@ -30,11 +30,11 @@ yarn test
 ``` bash
 yarn build <name>  # '<name>构建目标[为空默认全部]'
 ```
+### 构建
+
 ### Tasking
 #### vue
 - [✔️] vue打包入口 区分runtime/full-build构建
-#### shared
-- [✔️] 工具库，通用方法
 #### reactivity
 - [✔️] reactive 的实现
 - [✔️] ref 的实现
@@ -55,7 +55,8 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 - [✖️] 支持 effect.scheduler
 - [✖️] 支持 effect.scheduler
 - [✖️] 支持 effect.stop
-
+#### shared
+- [✔️] 工具库，通用方法
 #### runtime-dom
 - [✔️] 浏览器的runtime，处理原生DOM API
 #### runtime-core
