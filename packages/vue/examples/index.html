@@ -7,10 +7,49 @@
   <title>mini-dev-vue3</title>
 </head>
 <body>
-<script src="../dist/vue.global.js"></script>
-<script>
-  const { createApp } = Vue
-  console.log(createApp());
-</script>
+  <div id="app">
+    <h1>{{ msg }}</h1>
+    <div>hello mini dev vue3 !!</div>
+    <child-comp></child-comp>
+  </div>
+  <script src="../dist/vue.global.js"></script>
+  <script>
+    const { createApp, reactive, isReactive, isReadonly, readonly, isProxy, toRaw, shallowReactive, markRaw, ref,isRef,toRef } = Vue
+    const app = createApp({
+      components: {
+        childComp: {
+          template: '<div>comp</div>'
+        }
+      },
+      setup() {
+        // console.log('hello setup');
+      }
+    })
+    app.mount('#app')
+
+
+    let obj1 = reactive({
+      a:1,
+    })
+
+    // obj1.b = 2
+
+    // let foo = ref(1)
+    // foo.value = 15
+
+    let a = toRef(obj1, 'a')
+    // console.log(a.value);
+
+    // let obj2 = shallowReactive({
+    //   y:1,
+    //   bar: {
+    //     foo: 'foo'
+    //   }
+    // })
+    
+    // console.log(`-----app实例对象 start----`);
+    // console.log(app);
+    // console.log(`-----app实例对象 end----`);
+  </script>
 </body>
 </html>

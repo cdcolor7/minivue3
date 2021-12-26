@@ -1,7 +1,14 @@
-function reactive1(p1: string): string {
-    return p1
-}
-
 export {
-    reactive1
-}
+  reactive,
+  readonly,
+  isReactive,
+  isReadonly,
+  isProxy,
+  shallowReactive,
+  shallowReadonly,
+  markRaw,
+  toRaw,
+  ReactiveFlags
+} from './reactive'
+
+export * from './ref'

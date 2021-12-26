@@ -27,5 +27,9 @@
   "scripts": {
     "test": "jest"
   },
-  "devDependencies": {}
+  "dependencies": {
+    "@mini-dev-vue3/compiler-dom": "^1.0.0",
+    "@mini-dev-vue3/runtime-dom": "^1.0.0",
+    "@mini-dev-vue3/shared": "^1.0.0"
+  }
 }
