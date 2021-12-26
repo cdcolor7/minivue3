@@ -30,9 +30,8 @@ yarn test
 ``` bash
 yarn build <name>  # '<name>构建目标[为空默认全部]'
 ```
-### 构建
 
-### Tasking
+### 功能实现
 #### vue
 - [✔️] vue打包入口 区分runtime/full-build构建
 #### reactivity
