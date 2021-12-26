@@ -59,19 +59,23 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 - [✖️] compiler 浏览器编译模块
 #### reactivity
 - [✔️] reactive 的实现
-- [✖️] ref 的实现
+- [✔️] ref 的实现
 - [✔️] readonly 的实现
-- [✖️] computed 的实现
-- [✖️] track 依赖收集
-- [✖️] trigger 触发依赖
 - [✔️] 支持 isReactive
 - [✔️] 支持嵌套 reactive
 - [✔️] 支持 toRaw
-- [✖️] 支持 effect.scheduler
-- [✖️] 支持 effect.stop
+- [✔️] 支持 unref
+- [✔️] 支持 toRef
+- [✔️] 支持 toRefs
 - [✔️] 支持 isReadonly
 - [✔️] 支持 isProxy
 - [✔️] 支持 shallowReadonly
-- [✖️] 支持 proxyRefs
+- [✔️] 支持 proxyRefs
+- [✖️] computed 的实现
+- [✖️] track 依赖收集
+- [✖️] trigger 触发依赖
+- [✖️] 支持 effect.scheduler
+- [✖️] 支持 effect.scheduler
+- [✖️] 支持 effect.stop
 ### vue3源码思维导图
 [Vue3源码思维导图](https://www.processon.com/view/link/6175765c7d9c08459faeddf0#map)  

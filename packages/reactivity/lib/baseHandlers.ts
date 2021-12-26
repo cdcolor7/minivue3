@@ -5,8 +5,7 @@ import {
   isArray,
   isObject
 } from '@mini-dev-vue3/shared'
-import { ReactiveFlags, readonly, reactive } from './reactive'
-import { Target } from './reactive'
+import { ReactiveFlags, readonly, reactive, Target } from './reactive'
 
 const get = createGetter()
 const shallowGet = createGetter(false, true)
@@ -69,7 +68,7 @@ function createGetter(isReadonly = false, shallow = false) {
       return target
     }
     const res = Reflect.get(target, key)
-    console.log(`get: ${key}`)
+    // console.log(`get: ${key}`)
     // if (!isReadonly) {
     //   track(target, TrackOpTypes.GET, key)
     // }
@@ -91,7 +90,7 @@ function createSetter(shallow = false) {
       ? Number(key) < target.length
       : hasOwn(target, key)
     const result = Reflect.set(target, key, value)
-    console.log(`set: ${key}`)
+    // console.log(`set: ${key}`)
     if (!hadKey) {
       // trigger(target, TriggerOpTypes.ADD, key, value)
     } else if (hasChanged(value, oldValue)) {
@@ -106,7 +105,7 @@ function deleteProperty(target: object, key: string): boolean {
   const hadKey = hasOwn(target, key)
   // const oldValue = (target as any)[key]
   const result = Reflect.deleteProperty(target, key)
-  console.log(`del: ${key}`)
+  // console.log(`del: ${key}`)
   if (result && hadKey) {
     // trigger(target, TriggerOpTypes.DELETE, key, undefined, oldValue)
   }
