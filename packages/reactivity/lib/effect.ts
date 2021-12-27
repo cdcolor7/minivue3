@@ -1,13 +1,8 @@
+import { TrackOpTypes, TriggerOpTypes } from './operations'
 import { extend } from '@mini-dev-vue3/shared'
 
-export interface DebuggerOptions {
-  onTrack?: (event: any) => void
-  onTrigger?: (event: any) => void
-}
-
 export type EffectScheduler = (...args: any[]) => any
-
-export interface ReactiveEffectOptions extends DebuggerOptions {
+export interface ReactiveEffectOptions {
   lazy?: boolean
   scheduler?: EffectScheduler
   scope?: any
@@ -20,6 +15,7 @@ export interface ReactiveEffectRunner<T = any> {
   effect: ReactiveEffect
 }
 
+// 返回副作用函数
 export function effect<T = any>(
   fn: () => T,
   options?: ReactiveEffectOptions
@@ -62,8 +58,14 @@ export class ReactiveEffect<T = any> {
     /*
       开发中
     */
-    const result = this.fn()
-    return result
+    if (!effectStack.includes(this)) {
+      try {
+        effectStack.push((activeEffect = this)) // 入栈
+        return this.fn()
+      } catch (error) {
+        effectStack.pop() // 出栈
+      }
+    }
   }
 
   stop() {
@@ -95,14 +97,22 @@ function cleanupEffect(effect: ReactiveEffect) {
 }
 
 // 依赖收集
-export function track(target: object, type: any, key: unknown) {}
+export function track(target: object, type: TrackOpTypes, key: unknown) {
+  /*
+    开发中
+  */
+}
 
 // 触发更新
 export function trigger(
   target: object,
-  type: any,
+  type: TriggerOpTypes,
   key?: unknown,
   newValue?: unknown,
   oldValue?: unknown,
   oldTarget?: Map<unknown, unknown> | Set<unknown>
-) {}
+) {
+  /*
+    开发中
+  */
+}
