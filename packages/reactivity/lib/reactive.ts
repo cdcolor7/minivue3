@@ -124,7 +124,7 @@ export function toRaw<T>(observed: T): T {
   return raw ? toRaw(raw) : observed
 }
 
-// 标记一个对象，使其永远不会转换为 proxy。返回对象本身。
+// 标记一个对象，使其永远不会转换为 proxy,返回对象本身。
 export function markRaw<T extends object>(value: T): T {
   def(value, ReactiveFlags.SKIP, true)
   return value
