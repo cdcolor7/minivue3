@@ -1,5 +1,7 @@
 import { hasChanged, isArray } from '@mini-dev-vue3/shared'
+import { createDep } from './dep'
 import { toRaw, toReactive, isProxy, isReactive } from './reactive'
+import { trackEffects, triggerEffects, isTracking } from './effect'
 
 export interface Ref<T = any> {
   value: T
@@ -93,16 +95,17 @@ class ObjectRefImpl<T extends object, K extends keyof T> {
 class RefImpl<T> {
   private _value: T
   private _rawValue: T
-  // public dep?: Dep = undefined
+  public dep: any
   public readonly __v_isRef = true
 
   constructor(value: T, public readonly _shallow: boolean) {
     this._rawValue = _shallow ? value : toRaw(value)
     this._value = _shallow ? value : toReactive(value)
+    this.dep = createDep()
   }
 
   get value() {
-    // trackRefValue(this)
+    trackRefValue(this)
     return this._value
   }
 
@@ -111,7 +114,17 @@ class RefImpl<T> {
     if (hasChanged(newVal, this._rawValue)) {
       this._rawValue = newVal
       this._value = this._shallow ? newVal : toReactive(newVal)
-      // triggerRefValue(this, newVal)
+      triggerRefValue(this)
     }
+  }
+}
+
+export function triggerRefValue(ref: any) {
+  triggerEffects(ref.dep)
+}
+
+export function trackRefValue(ref: any) {
+  if (isTracking()) {
+    trackEffects(ref.dep)
   }
 }
