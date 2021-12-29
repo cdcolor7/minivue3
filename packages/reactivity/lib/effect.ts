@@ -1,5 +1,8 @@
 import { TrackOpTypes, TriggerOpTypes } from './operations'
 import { extend } from '@mini-dev-vue3/shared'
+import { createDep } from './dep'
+
+const targetMap = new WeakMap()
 
 export type EffectScheduler = (...args: any[]) => any
 export interface ReactiveEffectOptions {
@@ -52,18 +55,21 @@ export class ReactiveEffect<T = any> {
   ) {}
 
   run() {
+    // 只执行 不进行依赖收集
     if (!this.active) {
       return this.fn()
     }
-    /*
-      开发中
-    */
+    // 执行fn收集依赖
     if (!effectStack.includes(this)) {
       try {
-        effectStack.push((activeEffect = this)) // 入栈
-        return this.fn()
+        effectStack.push((activeEffect = this)) // 入栈  activeEffect 当前进行进行依赖收集的 ReactiveEffect实例
+        enableTracking()
+        return this.fn() // 执行用户传入的fn函数
       } catch (error) {
+        resetTracking()
         effectStack.pop() // 出栈
+        const n = effectStack.length
+        activeEffect = n > 0 ? effectStack[n - 1] : undefined // activeEffect 切换为栈顶正在执行的 ReactiveEffect实例
       }
     }
   }
@@ -78,6 +84,19 @@ export class ReactiveEffect<T = any> {
       this.active = false
     }
   }
+}
+
+let shouldTrack = true
+const trackStack: boolean[] = []
+
+export function enableTracking() {
+  trackStack.push(shouldTrack)
+  shouldTrack = true
+}
+
+export function resetTracking() {
+  const last = trackStack.pop()
+  shouldTrack = last === undefined ? true : last
 }
 
 export function stop(runner: ReactiveEffectRunner) {
@@ -96,22 +115,44 @@ function cleanupEffect(effect: ReactiveEffect) {
   }
 }
 
+// 判断是否在依赖收集
+export function isTracking() {
+  return shouldTrack && activeEffect !== undefined
+}
+
 // 依赖收集
 export function track(target: object, type: TrackOpTypes, key: unknown) {
+  if (!isTracking()) {
+    return
+  }
+  let depsMap = targetMap.get(target)
+  if (!depsMap) {
+    depsMap = new Map()
+    targetMap.set(target, depsMap)
+  }
+
+  let dep = depsMap.get(key)
+  if (!dep) {
+    dep = createDep()
+    depsMap.set(key, dep)
+  }
+
+  trackEffects(dep)
   /*
     开发中
   */
 }
 
+export function trackEffects(dep: any) {
+  // 用 dep 来存放所有的 effect
+  if (!dep.has(activeEffect)) {
+    dep.add(activeEffect)
+    ;(activeEffect as any).deps.push(dep)
+  }
+}
+
 // 触发更新
-export function trigger(
-  target: object,
-  type: TriggerOpTypes,
-  key?: unknown,
-  newValue?: unknown,
-  oldValue?: unknown,
-  oldTarget?: Map<unknown, unknown> | Set<unknown>
-) {
+export function trigger(target: object, type: TriggerOpTypes, key?: unknown) {
   /*
     开发中
   */
