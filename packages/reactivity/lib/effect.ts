@@ -153,7 +153,37 @@ export function trackEffects(dep: any) {
 
 // 触发更新
 export function trigger(target: object, type: TriggerOpTypes, key?: unknown) {
-  /*
-    开发中
-  */
+  // 判断代理对象在targetMap是否存在
+  const depsMap = targetMap.get(target)
+  if (!depsMap) {
+    return
+  }
+  // 先收集所有的 dep 放到 deps 里面 后面会统一处理
+  let deps: any[] = []
+
+  const dep = depsMap.get(key)
+
+  deps.push(dep) // 暂时只实现了 GET 类型
+
+  const effects: Array<any> = []
+  deps.forEach(dep => {
+    // 这里解构 dep 得到的是 dep 内部存储的 effect
+    effects.push(...dep)
+  })
+
+  triggerEffects(createDep(effects))
+}
+
+// 执行收集到的所有的 effect 的 run 方法
+export function triggerEffects(dep: any) {
+  for (const effect of dep) {
+    if (effect.scheduler) {
+      // scheduler 可以让用户自己选择调用的时机
+      // 这样就可以灵活的控制调用了
+      // 在 runtime-core 中，就是使用了 scheduler 实现了在 next ticker 中调用的逻辑
+      effect.scheduler()
+    } else {
+      effect.run()
+    }
+  }
 }

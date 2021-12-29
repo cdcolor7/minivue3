@@ -48,12 +48,11 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 - [✔️] 支持 isProxy
 - [✔️] 支持 shallowReadonly
 - [✔️] 支持 proxyRefs
+- [✔️] track 依赖收集
+- [✔️] trigger 触发依赖
+- [✔️] 支持 effect.stop
+- [✖️] 支持 effect.scheduler
 - [✖️] computed 的实现
-- [✖️] track 依赖收集
-- [✖️] trigger 触发依赖
-- [✖️] 支持 effect.scheduler
-- [✖️] 支持 effect.scheduler
-- [✖️] 支持 effect.stop
 #### shared
 - [✔️] 工具库，通用方法
 #### runtime-dom
