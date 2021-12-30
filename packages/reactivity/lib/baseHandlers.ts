@@ -72,7 +72,7 @@ function createGetter(isReadonly = false, shallow = false) {
     const res = Reflect.get(target, key)
     // console.log(`get: ${key}`)
     if (!isReadonly) {
-      track(target, TrackOpTypes.GET, key) // 依赖收集 代码只读对象无法进行依赖收集
+      track(target, TrackOpTypes.GET, key) // 依赖收集 代理的只读对象无需进行依赖收集
     }
     if (shallow) {
       // 浅层代理直接返回

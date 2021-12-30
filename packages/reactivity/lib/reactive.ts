@@ -25,7 +25,7 @@ export const shallowReactiveMap = new WeakMap<Target, any>()
 export const readonlyMap = new WeakMap<Target, any>()
 export const shallowReadonlyMap = new WeakMap<Target, any>()
 
-//  返回对象的响应式副本 proxy
+//  返回对象的响应式代理 proxy
 export function reactive(target: object) {
   return createReactiveObject(target, false, mutableHandlers, reactiveMap)
 }

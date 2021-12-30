@@ -65,7 +65,7 @@ export class ReactiveEffect<T = any> {
         effectStack.push((activeEffect = this)) // 入栈  activeEffect 当前进行进行依赖收集的 ReactiveEffect实例
         enableTracking()
         return this.fn() // 执行用户传入的fn函数
-      } catch (error) {
+      } finally {
         resetTracking()
         effectStack.pop() // 出栈
         const n = effectStack.length
