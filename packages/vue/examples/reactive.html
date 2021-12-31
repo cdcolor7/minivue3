@@ -16,21 +16,21 @@
   <script>
     const { createApp, reactive, effect, ref } = Vue
     
-    // let obj1 = reactive({
-    //   a:1,
-    // })
+    let obj1 = reactive({
+      a:1,
+    })
 
     const refv = ref(0) 
 
     let effectFn = effect(() => {
-      // let b = obj1.a ++
-      let b = refv.value ++
+      let b = obj1.a ++ 
+      // let b = refv.value ++
       console.log(b);
     })
 
     setTimeout(() => {
-      obj1.a = 100
-      refv.value = 101
+      obj1.a = 102
+      // refv.value = 101
     },1000)
 
 

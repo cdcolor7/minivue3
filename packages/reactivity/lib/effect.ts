@@ -147,7 +147,7 @@ export function trackEffects(dep: any) {
   // 用 dep 来存放所有的 effect
   if (!dep.has(activeEffect)) {
     dep.add(activeEffect)
-    ;(activeEffect as any).deps.push(dep)
+    activeEffect!.deps.push(dep) // !ts的非空断言
   }
 }
 

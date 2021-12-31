@@ -1,10 +1,22 @@
-export interface VNode {
+import { RendererNode } from './renderer'
+
+export interface VNode<HostNode = RendererNode> {
   __v_isVNode: true
+  el: HostNode | null
+  key: string | number | symbol | null
+  type: VNodeTypes
+  props: VNodeProps | null
+  children: any
+  component: any
+  shapeFlag: number
+  patchFlag: number
 }
 
 export type VNodeProps = {
   key?: string | number | symbol
 }
+
+export const Text = Symbol('Text')
 
 export const Fragment = Symbol('Fragment') as any as {
   __isFragment: true
