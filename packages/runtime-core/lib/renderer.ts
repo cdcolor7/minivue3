@@ -1,6 +1,7 @@
 import { VNode, Fragment, Text } from './vnode'
 import { createAppAPI, CreateAppFunction } from './apiCreateApp'
 import { ShapeFlags } from '@mini-dev-vue3/shared'
+import { createComponentInstance, setupComponent } from './component'
 export interface Renderer<HostElement = RendererElement> {
   render: RootRenderFunction<HostElement>
   createApp: CreateAppFunction<HostElement>
@@ -52,6 +53,20 @@ type ProcessTextOrCommentFn = (
   container: RendererElement
 ) => void
 
+export type MountComponentFn = (
+  initialVNode: VNode,
+  container: RendererElement,
+  anchor: RendererNode | null,
+  parentComponent: any
+) => void
+
+export type SetupRenderEffectFn = (
+  instance: any,
+  initialVNode: VNode,
+  container: RendererElement,
+  anchor: RendererNode | null
+) => void
+
 export function createRenderer<
   HostNode = RendererNode,
   HostElement = RendererElement
@@ -60,7 +75,7 @@ export function createRenderer<
 }
 
 function baseCreateRenderer(options: RendererOptions): any {
-  const render: RootRenderFunction = (vnode, container, isSVG) => {
+  const render: RootRenderFunction = (vnode, container) => {
     if (vnode == null) {
       if (container._vnode) {
         // unmount(container._vnode, null, null, true)
@@ -109,10 +124,55 @@ function baseCreateRenderer(options: RendererOptions): any {
           console.log('element')
           // processElement(n1, n2, container)
         } else if (shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
-          console.log('component')
-          // processComponent(n1, n2, container, parentComponent)
+          processComponent(n1, n2, container, anchor, parentComponent)
         }
     }
+  }
+
+  // 组件处理函数
+  const processComponent = (
+    n1: VNode | null,
+    n2: VNode,
+    container: RendererElement,
+    anchor: RendererNode | null,
+    parentComponent: any
+  ) => {
+    if (n1 == null) {
+      // 组件挂载 - KeepAlive暂未实现
+      mountComponent(n2, container, anchor, parentComponent)
+    } else {
+      // 组件更新
+      // updateComponent(n1, n2, container)
+    }
+  }
+
+  // 组件创建
+  // 1. 创建组件实例 instance 2.  给 instance 加工 3. 安装渲染函数副作用
+  const mountComponent: MountComponentFn = (
+    initialVNode,
+    container,
+    anchor,
+    parentComponent
+  ) => {
+    const instance = (initialVNode.component = createComponentInstance(
+      initialVNode,
+      parentComponent
+    ))
+
+    // 组件安装
+    setupComponent(instance)
+
+    // 安装渲染函数副作用
+    setupRenderEffect(instance, initialVNode, container, anchor)
+  }
+
+  const setupRenderEffect: SetupRenderEffectFn = (
+    instance,
+    initialVNode,
+    container,
+    anchor
+  ) => {
+    console.log('安装渲染函数副作用')
   }
 
   // 创建文本节点
