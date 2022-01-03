@@ -25,7 +25,7 @@ export const shallowReactiveMap = new WeakMap<Target, any>()
 export const readonlyMap = new WeakMap<Target, any>()
 export const shallowReadonlyMap = new WeakMap<Target, any>()
 
-//  返回对象的响应式副本 proxy
+//  返回对象的响应式代理 proxy
 export function reactive(target: object) {
   return createReactiveObject(target, false, mutableHandlers, reactiveMap)
 }
@@ -124,7 +124,7 @@ export function toRaw<T>(observed: T): T {
   return raw ? toRaw(raw) : observed
 }
 
-// 标记一个对象，使其永远不会转换为 proxy。返回对象本身。
+// 标记一个对象，使其永远不会转换为 proxy,返回对象本身。
 export function markRaw<T extends object>(value: T): T {
   def(value, ReactiveFlags.SKIP, true)
   return value

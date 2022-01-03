@@ -1,7 +1,7 @@
 # mini-dev-vue3
 
 ### 介绍
-深入学习vue3源代码，基于TypeScript语言开发、Lerna + Monorepo多包管理实现一个mini版的vue3框架
+深入学习vue3源代码，基于TypeScript语言开发、lerna + monorepo多包管理实现一个mini版的vue3框架。
 
 ### 安装依赖
 npm 不支持 workspaces，安装依赖必须使用 yarn 安装依赖
@@ -48,33 +48,33 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 - [✔️] 支持 isProxy
 - [✔️] 支持 shallowReadonly
 - [✔️] 支持 proxyRefs
+- [✔️] track 依赖收集
+- [✔️] trigger 触发依赖
+- [✔️] 支持 effect.stop
+- [✖️] 支持 effect.scheduler
 - [✖️] computed 的实现
-- [✖️] track 依赖收集
-- [✖️] trigger 触发依赖
-- [✖️] 支持 effect.scheduler
-- [✖️] 支持 effect.scheduler
-- [✖️] 支持 effect.stop
 #### shared
 - [✔️] 工具库，通用方法
 #### runtime-dom
 - [✔️] 浏览器的runtime，处理原生DOM API
 #### runtime-core
-- [✖️] 支持组件类型
+- [✔️] 支持组件类型
+- [✖️] 支持 setupRenderEffect
+- [✔️] 初始化 props
+- [✔️] setup 可获取 props 和 context
+- [✔️] 支持 component emit
+- [✔️] 支持 proxy
+- [✔️] 可以在 render 函数中获取 setup 返回的对象
+- [✔️] 支持 getCurrentInstance
+- [✔️] 支持 provide/inject
+- [✔️] 支持 $el api
 - [✖️] 支持 element 类型
-- [✖️] 初始化 props
-- [✖️] setup 可获取 props 和 context
-- [✖️] 支持 component emit
-- [✖️] 支持 proxy
-- [✖️] 可以在 render 函数中获取 setup 返回的对象
+- [✔️] 支持 Text 类型节点
 - [✖️] nextTick 的实现
-- [✖️] 支持 getCurrentInstance
-- [✖️] 支持 provide/inject
 - [✖️] 支持最基础的 slots
-- [✖️] 支持 Text 类型节点
-- [✖️] 支持 $el api
 #### compiler-core
-- [✔️] Parse AST的实现
-- [✔️] Transform AST优化
+- [✖️] Parse AST的实现
+- [✖️] Transform AST优化
 - [✖️] Codegen 生成render函数
 #### compiler-dom
 - [✖️] compiler 浏览器编译模块

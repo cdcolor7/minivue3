@@ -8,25 +8,35 @@
 </head>
 <body>
   <div id="app">
-    <!-- <h1>{{ msg }}</h1>
+    <h1>{{ msg }}</h1>
     <div>hello mini dev vue3 !!</div>
-    <child-comp></child-comp> -->
+    <child-comp></child-comp>
   </div>
   <script src="../dist/vue.global.js"></script>
   <script>
-    const { createApp, ref, h } = Vue
-    const app = createApp({
-      setup() {
-        const msg = ref('min-vue')
-        return {
-          msg
-        }
-      },
-      render() {
-        return h("div", { tId: 1 }, [h("h1", {}, this.msg), h("p", {}, "hello mini dev vue3 !!")]);
-      },
+    const { createApp, reactive, effect, ref } = Vue
+    
+    let obj1 = reactive({
+      a:1,
     })
-    app.mount('#app')
+
+    const refv = ref(0) 
+
+    let effectFn = effect(() => {
+      let b = obj1.a ++ 
+      // let b = refv.value ++
+      console.log(b);
+    })
+
+    setTimeout(() => {
+      obj1.a = 102
+      // refv.value = 101
+    },1000)
+
+
+    
+    
+    
   </script>
 </body>
 </html>

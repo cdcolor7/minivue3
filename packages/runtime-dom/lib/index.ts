@@ -43,3 +43,5 @@ function normalizeContainer(container: string): Element | null {
   }
   return container as any
 }
+
+export * from '@mini-dev-vue3/runtime-core'

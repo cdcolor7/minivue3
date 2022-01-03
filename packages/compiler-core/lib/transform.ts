@@ -13,7 +13,7 @@ export function transform(root: RootNode, options: any = {}) {
   //   hoistStatic(root, context)
   // }
   if (!options.ssr) {
-    createRootCodegen(root, context)
+    // createRootCodegen(root, context)
   }
   // finalize meta information
   root.helpers = [...context.helpers.keys()]

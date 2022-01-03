@@ -67,7 +67,7 @@ function parseChildren(
   ancestors: ElementNode[]
 ): TemplateChildNode[] {
   const parent = last(ancestors)
-  const ns = parent ? parent.ns : Namespaces.HTML
+  // const ns = parent ? parent.ns : Namespaces.HTML
   const nodes: TemplateChildNode[] = []
 
   while (!isEnd(context, mode, ancestors)) {
@@ -261,8 +261,8 @@ function parseTag(
   advanceSpaces(context)
 
   // save current state in case we need to re-parse attributes with v-pre
-  const cursor = getCursor(context)
-  const currentSource = context.source
+  // const cursor = getCursor(context)
+  // const currentSource = context.source
 
   // check <pre> tag
   if (context.options.isPreTag(tag)) {
