@@ -17,12 +17,24 @@ export function createComponentInstance(vnode: any, parent: any) {
     root: null,
     provides: parent ? parent.provides : {}, //  获取 parent 的 provides 作为当前组件的初始化值 这样就可以继承 parent.provides 的属性了
     proxy: null,
-    isMounted: false,
     attrs: {}, // 存放 attrs 的数据
     slots: {}, // 存放插槽的数据
     ctx: {}, // context 对象
     setupState: {}, // 存储 setup 的返回值
-    emit: () => {}
+    emit: () => {},
+    // lifecycle hooks
+    // not using enums here because it results in computed properties
+    isMounted: false,
+    isUnmounted: false,
+    isDeactivated: false,
+    bc: null,
+    c: null,
+    bm: null,
+    m: null,
+    bu: null,
+    u: null,
+    um: null,
+    bum: null
   }
   instance.ctx = {
     _: instance

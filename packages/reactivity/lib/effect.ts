@@ -46,6 +46,7 @@ let activeEffect: ReactiveEffect | undefined
 export class ReactiveEffect<T = any> {
   active = true
   deps: any[] = []
+  allowRecurse?: boolean
   onStop?: () => void
 
   constructor(
