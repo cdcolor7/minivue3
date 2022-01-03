@@ -185,7 +185,7 @@ function baseCreateRenderer(options: RendererOptions): any {
         // todo
         // 需要过滤掉vue自身用的key
         // 比如生命周期相关的 key: beforeMount、mounted
-        const nextVal = props[key]
+        // const nextVal = props[key]
         // hostPatchProp(el, key, null, nextVal);
       }
     }
@@ -312,10 +312,8 @@ function baseCreateRenderer(options: RendererOptions): any {
       // n1是null 说明是在初始化挂载阶段
       hostInsert((n2.el = hostCreateText(n2.children as string)), container)
     } else {
-      // update
       // 先对比一下 updated 之后的内容是否和之前的不一样
       // 在不一样的时候才需要 update text
-      // 这里抽离出来的接口是 setText
       // 注意，这里一定要记得把 n1.el 赋值给 n2.el, 不然后续是找不到值的
       const el = (n2.el = n1.el!)
       if (n2.children !== n1.children) {

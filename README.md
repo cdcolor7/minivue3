@@ -51,7 +51,7 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 - [✔️] track 依赖收集
 - [✔️] trigger 触发依赖
 - [✔️] 支持 effect.stop
-- [✖️] 支持 effect.scheduler
+- [✔️] 支持 effect.scheduler
 - [✖️] computed 的实现
 #### shared
 - [✔️] 工具库，通用方法
@@ -59,7 +59,7 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 - [✔️] 浏览器的runtime，处理原生DOM API
 #### runtime-core
 - [✔️] 支持组件类型
-- [✖️] 支持 setupRenderEffect
+- [✔️] 支持 setupRenderEffect
 - [✔️] 初始化 props
 - [✔️] setup 可获取 props 和 context
 - [✔️] 支持 component emit
@@ -68,9 +68,9 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 - [✔️] 支持 getCurrentInstance
 - [✔️] 支持 provide/inject
 - [✔️] 支持 $el api
-- [✖️] 支持 element 类型
+- [✔️] 支持 element 类型
 - [✔️] 支持 Text 类型节点
-- [✖️] nextTick 的实现
+- [✔️] nextTick 的实现
 - [✖️] 支持最基础的 slots
 #### compiler-core
 - [✖️] Parse AST的实现

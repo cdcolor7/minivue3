@@ -1,4 +1,4 @@
-import { VNode } from './vnode';
+import { VNode } from './vnode'
 
 type VNodeChildAtom =
   | VNode
@@ -12,3 +12,8 @@ type VNodeChildAtom =
 export type VNodeArrayChildren = Array<VNodeArrayChildren | VNodeChildAtom>
 export type VNodeChild = VNodeChildAtom | VNodeArrayChildren
 export type RenderFunction = () => VNodeChild
+
+// 兼容vue2.x  options api
+export function applyOptions() {
+  // todo
+}
