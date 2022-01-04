@@ -80,3 +80,8 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 - [✖️] compiler 浏览器编译模块
 ### vue3源码思维导图
 [Vue3源码思维导图](https://www.processon.com/view/link/6175765c7d9c08459faeddf0#map)  
+### 学习借鉴
+
+1、[vue3](https://github.com/vuejs/vue-next) 源码  
+2、[min-vue](https://github.com/cuixiaorui/mini-vue) 源码
+
