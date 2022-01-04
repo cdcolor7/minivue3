@@ -1,9 +1,10 @@
 import { VNode, Fragment, Text } from './vnode'
 import { createAppAPI, CreateAppFunction } from './apiCreateApp'
-import { ShapeFlags } from '@mini-dev-vue3/shared'
+import { EMPTY_OBJ, ShapeFlags } from '@mini-dev-vue3/shared'
 import { createComponentInstance, setupComponent } from './component'
 import { ReactiveEffect } from '@mini-dev-vue3/reactivity'
 import { queueJob, SchedulerJob } from './scheduler'
+import { shouldUpdateComponent } from './componentRenderUtils'
 export interface Renderer<HostElement = RendererElement> {
   render: RootRenderFunction<HostElement>
   createApp: CreateAppFunction<HostElement>
@@ -57,6 +58,14 @@ type ProcessTextOrCommentFn = (
 
 export type MountComponentFn = (
   initialVNode: VNode,
+  container: RendererElement,
+  anchor: RendererNode | null,
+  parentComponent: any
+) => void
+
+type PatchChildrenFn = (
+  n1: VNode | null,
+  n2: VNode,
   container: RendererElement,
   anchor: RendererNode | null,
   parentComponent: any
@@ -143,7 +152,7 @@ function baseCreateRenderer(options: RendererOptions): any {
       // 组件挂载 - KeepAlive暂未实现
       mountComponent(n2, container, anchor, parentComponent)
     } else {
-      // updateComponent(n1, n2, container) // 组件更新
+      updateComponent(n1, n2) // 组件更新
     }
   }
 
@@ -157,7 +166,7 @@ function baseCreateRenderer(options: RendererOptions): any {
     if (!n1) {
       mountElement(n2, container, anchor, parentComponent) // 节点挂载
     } else {
-      // patchElement(n1, n2, parentComponent); // 节点更新
+      patchElement(n1, n2, parentComponent) // 节点更新
     }
   }
 
@@ -193,13 +202,65 @@ function baseCreateRenderer(options: RendererOptions): any {
     hostInsert(el, container, anchor)
   }
 
-  function mountChildren(children: any, container: any) {
+  const mountChildren = (children: any, container: any) => {
     children.forEach((VNodeChild: any) => {
       // todo
       // 这里应该需要处理一下 vnodeChild
       // 因为有可能不是 vnode 类型
       patch(null, VNodeChild, container)
     })
+  }
+
+  const patchElement = (n1: VNode, n2: VNode, parentComponent: any) => {
+    // 需要把 el 挂载到新的 vnode
+    const el = (n2.el = n1.el!)
+    // 对比 props
+    // const oldProps = n1.props || EMPTY_OBJ
+    // const newProps = n2.props || EMPTY_OBJ
+    // patchProps(el, oldProps, newProps);
+
+    // 全量对比 full diff
+    patchChildren(n1, n2, el, null, parentComponent)
+  }
+
+  const patchChildren: PatchChildrenFn = (
+    n1,
+    n2,
+    container,
+    anchor,
+    parentComponent
+  ) => {
+    const c1 = n1 && n1.children
+    const prevShapeFlag = n1 ? n1.shapeFlag : 0
+    const c2 = n2.children
+    const { shapeFlag } = n2
+
+    // 如果 n2 的 children 是 text 类型的话，直接重新设置一下 text 即可
+    if (shapeFlag & ShapeFlags.TEXT_CHILDREN) {
+      if (c2 !== c1) {
+        hostSetElementText(container, c2 as string)
+      }
+    } else {
+      // 如果之前是 array_children
+      // 现在还是 array_children 的话
+      // 那么我们就需要对比两个 children 啦
+      if (prevShapeFlag & ShapeFlags.ARRAY_CHILDREN) {
+        if (shapeFlag & ShapeFlags.ARRAY_CHILDREN) {
+          patchKeyedChildren(c1, c2, container, anchor, parentComponent)
+        }
+      }
+    }
+  }
+
+  // patch核心函数
+  const patchKeyedChildren = (
+    c1: any[],
+    c2: any[],
+    container: RendererElement,
+    parentAnchor: RendererNode | null,
+    parentComponent: any
+  ) => {
+    console.log('patch vnode')
   }
 
   // 组件创建
@@ -220,6 +281,22 @@ function baseCreateRenderer(options: RendererOptions): any {
 
     // 安装渲染函数副作用
     setupRenderEffect(instance, initialVNode, container, anchor)
+  }
+
+  // 组件更新
+  const updateComponent = (n1: VNode, n2: VNode) => {
+    const instance = (n2.component = n1.component)!
+    if (shouldUpdateComponent(n1, n2)) {
+      // 那么 next 就是新的 vnode 了（也就是 n2）
+      instance.next = n2
+      // 调用 update 再次更新调用 patch 逻辑
+      instance.update()
+    } else {
+      // 不需要更新的话，那么只需要覆盖下面的属性即可
+      n2.component = n1.component
+      n2.el = n1.el
+      instance.vnode = n2
+    }
   }
 
   const setupRenderEffect: SetupRenderEffectFn = (

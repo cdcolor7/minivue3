@@ -14,16 +14,22 @@
   </div>
   <script src="../dist/vue.global.js"></script>
   <script>
-    const { createApp, ref, h } = Vue
+    const { createApp, ref, h, reactive } = Vue
     const app = createApp({
       setup() {
-        const msg = ref('min-vue')
+        const cot = reactive({
+          msg: 'hello min vue'
+        })
+        setTimeout(() => {
+          cot.msg = 'hello !!!'
+        }, 3000)
         return {
-          msg
+          cot
         }
       },
       render() {
-        return h("div", { tId: 1 }, [h("h1", {}, this.msg), h("p", {}, "hello mini dev vue3 !!")]);
+        return h("div", { tId: 1 }, this.cot.msg);
+        // return h("div", { tId: 1 }, [h("h1", {}, this.cot.msg), h("p", {}, "hello mini dev vue3 !!")]);
       },
     })
     app.mount('#app')
