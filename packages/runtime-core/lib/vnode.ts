@@ -8,6 +8,7 @@ export interface VNode<
 > {
   __v_isVNode: boolean
   el: HostNode | null
+  anchor: HostNode | null // fragment anchor
   key: any
   type: any
   props: (VNodeProps & ExtraProps) | null
@@ -77,6 +78,7 @@ function createBaseVNode(
   const vnode: VNode = {
     __v_isVNode: true,
     el: null,
+    anchor: null,
     key: props?.key,
     type,
     props,
