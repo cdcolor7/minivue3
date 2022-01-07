@@ -1,7 +1,7 @@
 export { getCurrentInstance } from './component'
 export { RenderFunction } from './componentOptions'
 export { App, CreateAppFunction } from './apiCreateApp'
-export { createRenderer } from './renderer'
+export { createRenderer, RendererOptions } from './renderer'
 export { createVNode } from './vnode'
 // VNode types
 export { Fragment, Text } from './vnode'

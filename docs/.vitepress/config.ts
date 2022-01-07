@@ -1,7 +1,8 @@
 export default {
   lang: 'en-US',
   title: 'mini-dev-vue3 源码学习',
-  description: '深入学习vue3源代码，基于TypeScript语言开发、Lerna + Monorepo多包管理实现一个mini版的vue3框架',
+  description:
+    '深入学习vue3源代码，基于TypeScript语言开发、Lerna + Monorepo多包管理实现一个mini版的vue3框架',
 
   themeConfig: {
     // repo: 'vuejs/vitepress',
@@ -58,38 +59,48 @@ function getGuideSidebar() {
         { text: '开篇词', link: '/vue3/index' },
         { text: '目录结构', link: '/vue3/prepare/catalogue' },
         { text: '源码构建', link: '/vue3/prepare/build' },
-        { text: 'Vue3入口', link: '/vue3/prepare/entrance' },
+        { text: 'Vue3入口', link: '/vue3/prepare/entrance' }
       ]
     },
     {
-      text: 'Compiler-Core',
+      text: '数据响应式',
       children: [
-        { text: 'Introduction', link: '/vue3/compiler/core-index' },
+        { text: '功能概要', link: '/vue3/reactivity/index' },
+        { text: 'reactive', link: '/vue3/reactivity/reactive' },
+        { text: 'ref', link: '/vue3/reactivity/ref' },
+        { text: 'baseHandlers', link: '/vue3/reactivity/baseHandlers' },
+        { text: 'effect', link: '/vue3/reactivity/effect' }
       ]
     },
     {
-      text: 'Compiler-Dom',
+      text: 'Runtime core',
       children: [
-        { text: 'Introduction', link: '/vue3/compiler/dom-index' },
+        { text: '功能概要', link: '/vue3/runtime-core/index' },
+        { text: 'renderer', link: '/vue3/runtime-core/renderer' },
+        { text: 'component', link: '/vue3/runtime-core/component' },
+        { text: 'scheduler', link: '/vue3/runtime-core/scheduler' },
+        { text: 'vnode', link: '/vue3/runtime-core/vnode' }
       ]
     },
     {
-      text: 'Reactivity',
+      text: 'Runtime dom',
       children: [
-        { text: 'Introduction', link: '/vue3/reactivity/index' },
+        { text: '功能概要', link: '/vue3/runtime-dom/index' },
+        { text: 'nodeOps', link: '/vue3/runtime-dom/nodeOps' }
       ]
     },
     {
-      text: 'Runtime-Core',
+      text: '编译器-核心',
       children: [
-        { text: 'Introduction', link: '/vue3/runtime/core-index' },
+        { text: '功能概要', link: '/vue3/compiler-core/index' },
+        { text: 'parse', link: '/vue3/compiler-core/parse' },
+        { text: 'transform', link: '/vue3/compiler-core/transform' },
+        { text: 'codegen', link: '/vue3/compiler-core/codegen' }
       ]
     },
     {
-      text: 'Runtime-Dom',
-      children: [
-        { text: 'Introduction', link: '/vue3/runtime/dom-index' },
-      ]
+      text: '编译器-DOM',
+      children: [{ text: '功能概要', link: '/vue3/compiler-dom/index' }]
     }
   ]
 }
@@ -113,7 +124,7 @@ function getConfigSidebar() {
       text: 'Rollup',
       children: [
         { text: '基本使用', link: '/rollup/info' },
-        { text: 'tsconfig配置详解', link: '/rollup/tsconfig' },
+        { text: 'tsconfig配置详解', link: '/rollup/tsconfig' }
       ]
     }
   ]
