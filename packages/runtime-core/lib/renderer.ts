@@ -139,7 +139,7 @@ function baseCreateRenderer(options: RendererOptions): any {
     }
   }
 
-  // 处理frame
+  // 处理Fragment
   const processFragment = (
     n1: VNode | null,
     n2: VNode,
