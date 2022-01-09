@@ -22,7 +22,8 @@
     ]
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -35,5 +36,5 @@
     "@mini-dev-vue3/reactivity": "^0.1.0-alpha.0",
     "@mini-dev-vue3/shared": "^0.1.0-alpha.0"
   },
-  "gitHead": "f886bef02d2c01a129709b86614dde6576675c12"
+  "gitHead": "e07405aeccd97c67fdbfa9f13f5a1d9181b9f567"
 }
