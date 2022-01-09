@@ -69,7 +69,8 @@ function getGuideSidebar() {
         { text: 'reactive', link: '/vue3/reactivity/reactive' },
         { text: 'ref', link: '/vue3/reactivity/ref' },
         { text: 'baseHandlers', link: '/vue3/reactivity/baseHandlers' },
-        { text: 'effect', link: '/vue3/reactivity/effect' }
+        { text: 'effect', link: '/vue3/reactivity/effect' },
+        { text: 'computed', link: '/vue3/reactivity/computed' }
       ]
     },
     {
