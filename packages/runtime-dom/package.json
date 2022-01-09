@@ -1,6 +1,6 @@
 {
   "name": "@mini-dev-vue3/runtime-dom",
-  "version": "1.0.2",
+  "version": "0.0.1",
   "description": "> TODO: description",
   "author": "cdcolor7 <276214101@qq.com>",
   "homepage": "",
@@ -18,7 +18,7 @@
     "name": "VueRuntimeDOM"
   },
   "publishConfig": {
-    "registry": "http://registry.npm.taobao.org/"
+    "registry": "https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
@@ -28,9 +28,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@mini-dev-vue3/reactivity": "^1.0.2",
-    "@mini-dev-vue3/runtime-core": "^1.0.2",
-    "@mini-dev-vue3/shared": "^1.0.2"
+    "@mini-dev-vue3/reactivity": "0.0.1",
+    "@mini-dev-vue3/runtime-core": "0.0.1",
+    "@mini-dev-vue3/shared": "0.0.1"
   },
-  "gitHead": "2688002e9948093ea78f0064e2710badafe3075a"
+  "gitHead": "f886bef02d2c01a129709b86614dde6576675c12"
 }
