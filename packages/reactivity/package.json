@@ -1,6 +1,6 @@
 {
   "name": "@mini-dev-vue3/reactivity",
-  "version": "0.0.1",
+  "version": "0.1.0-alpha.0",
   "description": "",
   "keywords": [],
   "author": "cdcolor7 <276214101@qq.com>",
@@ -28,7 +28,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@mini-dev-vue3/shared": "0.0.1"
+    "@mini-dev-vue3/shared": "^0.1.0-alpha.0"
   },
   "gitHead": "f886bef02d2c01a129709b86614dde6576675c12"
 }
