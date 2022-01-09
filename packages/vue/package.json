@@ -31,5 +31,6 @@
     "@mini-dev-vue3/compiler-dom": "^1.0.1-alpha.0",
     "@mini-dev-vue3/runtime-dom": "^1.0.1-alpha.0",
     "@mini-dev-vue3/shared": "^1.0.1-alpha.0"
-  }
+  },
+  "gitHead": "e3bc0c8c44cc86a4a1522ddfbf81e2f1d06515f7"
 }
