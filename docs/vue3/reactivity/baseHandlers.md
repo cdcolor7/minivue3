@@ -1,6 +1,6 @@
 ### BaseHandlers 
 
-这里照顾一下新同学，科普一下 `handler`，音译为处理器，我们也可以理解为处理器，在[Proxy]()这篇文章中我们了解到 `Proxy(target, handlers)` 接收两个参数，`target` 为目标对象，`handlers` 就是针对我们对 `target` 操作的一系列行为同时做一些处理
+这里照顾一下新同学，科普一下 `handler`，音译为处理器，我们也可以理解为处理器，Proxy中我们了解到 `Proxy(target, handlers)` 接收两个参数，`target` 为目标对象，`handlers` 就是针对我们对 `target` 操作的一系列行为同时做一些处理
 
 ### 正文
 
@@ -233,6 +233,6 @@ const arrayInstrumentations: Record<string, Function> = {}
 - track 依赖收集
 - trigger 触发依赖
 
-这两个函数为 `effect` 里的方法，`effect` 为 `reactive` 的核心, 详情可以点[这里](/reactivity/effect)
+这两个函数为 `effect` 里的方法，`effect` 为 `reactive` 的核心, 详情可以点[这里](/vue3/reactivity/effect.html)
 
 参考来源：[vue3js](https://vue3js.cn/reactivity/baseHandlers.html)

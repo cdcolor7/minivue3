@@ -108,6 +108,4 @@ const isObservableType = /*#__PURE__*/ makeMap(
 
 看到这里我们大概清楚 `reactive` 是做为整个响应式的入口，负责处理目标对象是否可观察以及是否已被观察的逻辑，最后使用 `Proxy` 进行目标对象的代理，对 `es6` `Proxy` 概念清楚的同学应该 `Proxy` 重点的逻辑处理在 `Handlers` , 接下来我们就一起去看看各种 `Handlers`
 
-如果你对 `Proxy` 还不理解，可以点[这里]()学习
-
 参考来源：[vue3js](https://vue3js.cn/reactivity/reactive.html)

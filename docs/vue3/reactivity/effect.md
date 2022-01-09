@@ -2,7 +2,7 @@
 
 `effect` 作为 `reactive` 的核心，主要负责收集依赖，更新依赖
 
-如果你还没看过 `reactive` , 建议点[这里](/reactivity/reactive)
+如果你还没看过 `reactive` , 建议点[这里](/vue3/reactivity/reactive.html)
 
 文档直通车: [https://vue3js.cn/vue-composition-api/#reactive](https://vue3js.cn/vue-composition-api/#reactive)
 
@@ -45,7 +45,7 @@ export function effect<T = any>(
 }
 ```
 
-入口很简单，我们继续看一下 `effect` 是怎么创建的，如果下面这些你觉得相对难理解，建议先去看一遍[单元测试](/reactivity/effect.spec)，单元测试会助你快速了解整个单元的目的 
+入口很简单，我们继续看一下 `effect` 是怎么创建的，如果下面这些你觉得相对难理解，建议先去看一遍单元测试，单元测试会助你快速了解整个单元的目的 
 
 ```js
 function createReactiveEffect<T = any>(
@@ -105,7 +105,7 @@ function cleanup(effect: ReactiveEffect) {
 }
 ```
 
-看到这里应该会有一个问题了？`effect` 是如何收集及触发依赖的呢？现在我们回想一下在[reactive](/reactivity/reactive)高频出现的两个函数
+看到这里应该会有一个问题了？`effect` 是如何收集及触发依赖的呢？现在我们回想一下在[reactive](/vue3/reactivity/reactive.html)高频出现的两个函数
 
 - track 收集依赖(get操作)
 - trigger 触发依赖(触发更新后执行监听函数之前触发)

@@ -37,13 +37,12 @@ export const PublicInstanceProxyHandlers: ProxyHandler<any> = {
       return publicGetter(instance)
     }
   },
-
-  set({ _: instance }: any, key: string, value: any) {
+  set({ _: instance }: any, key: string, value: any): boolean {
     const { setupState } = instance
-
     if (setupState !== {} && hasOwn(setupState, key)) {
       // 有的话 那么就直接赋值
       setupState[key] = value
     }
+    return true
   }
 }

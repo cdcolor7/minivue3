@@ -1,6 +1,6 @@
 import { VNode, Fragment, Text } from './vnode'
 import { createAppAPI, CreateAppFunction } from './apiCreateApp'
-import { EMPTY_OBJ, ShapeFlags } from '@mini-dev-vue3/shared'
+import { ShapeFlags } from '@mini-dev-vue3/shared'
 import { createComponentInstance, setupComponent } from './component'
 import { ReactiveEffect } from '@mini-dev-vue3/reactivity'
 import { queueJob, SchedulerJob } from './scheduler'
@@ -104,10 +104,10 @@ function baseCreateRenderer(options: RendererOptions): any {
     createElement: hostCreateElement,
     createText: hostCreateText,
     setText: hostSetText,
-    setElementText: hostSetElementText,
-    parentNode: hostParentNode,
-    nextSibling: hostNextSibling,
-    cloneNode: hostCloneNode
+    setElementText: hostSetElementText
+    // parentNode: hostParentNode,
+    // nextSibling: hostNextSibling,
+    // cloneNode: hostCloneNode
   } = options
 
   const patch: PatchFn = (
@@ -216,6 +216,7 @@ function baseCreateRenderer(options: RendererOptions): any {
     // 处理 props
     if (props) {
       for (const key in props) {
+        console.log(key)
         // todo
         // 需要过滤掉vue自身用的key
         // 比如生命周期相关的 key: beforeMount、mounted
@@ -556,7 +557,7 @@ function baseCreateRenderer(options: RendererOptions): any {
     // 组件更新函数
     const componentUpdateFn = () => {
       if (!instance.isMounted) {
-        const { bm, m, parent } = instance
+        const { bm, m } = instance
         // beforeMount hook
         if (bm) {
           // invokeArrayFns(bm) // 触发 beforeMount 生命周期钩子
