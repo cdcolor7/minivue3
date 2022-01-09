@@ -1,6 +1,6 @@
 {
   "name": "@mini-dev-vue3/runtime-dom",
-  "version": "1.0.1-alpha.0",
+  "version": "1.0.1",
   "description": "> TODO: description",
   "author": "cdcolor7 <276214101@qq.com>",
   "homepage": "",
@@ -28,9 +28,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@mini-dev-vue3/reactivity": "^1.0.1-alpha.0",
-    "@mini-dev-vue3/runtime-core": "^1.0.1-alpha.0",
-    "@mini-dev-vue3/shared": "^1.0.1-alpha.0"
+    "@mini-dev-vue3/reactivity": "^1.0.1",
+    "@mini-dev-vue3/runtime-core": "^1.0.1",
+    "@mini-dev-vue3/shared": "^1.0.1"
   },
   "gitHead": "e3bc0c8c44cc86a4a1522ddfbf81e2f1d06515f7"
 }
