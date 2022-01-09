@@ -4,7 +4,7 @@
   "description": "> TODO: description",
   "author": "cdcolor7 <276214101@qq.com>",
   "homepage": "",
-  "license": "ISC",
+  "license": "MIT",
   "main": "index.js",
   "types": "dist/compiler-dom.d.ts",
   "directories": {
@@ -32,5 +32,5 @@
     "@mini-dev-vue3/compiler-core": "^0.1.0",
     "@mini-dev-vue3/shared": "^0.1.0"
   },
-  "gitHead": "e07405aeccd97c67fdbfa9f13f5a1d9181b9f567"
+  "gitHead": "17b059df907d19ca95d325731144b2b63486c753"
 }
