@@ -1,10 +1,10 @@
 {
-  "name": "@mini-dev-vue3/reactivity",
-  "version": "1.0.0",
+  "name": "@minivue3/reactivity",
+  "version": "0.0.1",
   "description": "",
   "keywords": [],
   "author": "cdcolor7 <276214101@qq.com>",
-  "license": "ISC",
+  "license": "MIT",
   "main": "index.js",
   "types": "dist/reactivity.d.ts",
   "directories": {
@@ -18,7 +18,7 @@
     "name": "VueReactivity"
   },
   "publishConfig": {
-    "registry": "http://registry.npm.taobao.org/"
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -27,8 +27,8 @@
   "scripts": {
     "test": "jest"
   },
-  "devDependencies": {},
   "dependencies": {
-    "@mini-dev-vue3/shared": "^1.0.0"
-  }
+    "@minivue3/shared": "^0.0.1"
+  },
+  "gitHead": "ece89509ba4d1d43d7b01ddef0893430637c393a"
 }

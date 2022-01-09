@@ -1,10 +1,10 @@
-export * from '@mini-dev-vue3/reactivity'
+export * from '@minivue3/reactivity'
 import {
   Renderer,
   createRenderer,
   CreateAppFunction
-} from '@mini-dev-vue3/runtime-core'
-import { isString } from '@mini-dev-vue3/shared'
+} from '@minivue3/runtime-core'
+import { isString } from '@minivue3/shared'
 import { nodeOps } from './nodeOps'
 
 /*
@@ -44,4 +44,4 @@ function normalizeContainer(container: string): Element | null {
   return container as any
 }
 
-export * from '@mini-dev-vue3/runtime-core'
+export * from '@minivue3/runtime-core'

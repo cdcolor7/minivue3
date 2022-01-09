@@ -1,5 +1,5 @@
 // import { RootNode } from './ast';
-import { extend, isArray, isHTMLTag, isSVGTag, NO } from '@mini-dev-vue3/shared'
+import { extend, isArray, isHTMLTag, isSVGTag, NO } from '@minivue3/shared'
 import { ParserOptions } from './options'
 import { advancePositionWithMutation } from './utils'
 import {

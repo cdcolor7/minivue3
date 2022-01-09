@@ -1,4 +1,4 @@
-import { isArray, isObject, isString, ShapeFlags } from '@mini-dev-vue3/shared'
+import { isArray, isObject, isString, ShapeFlags } from '@minivue3/shared'
 import { Data } from './component'
 import { RendererNode } from './renderer'
 

@@ -1,6 +1,6 @@
 import { RootRenderFunction } from './renderer'
 import { createVNode } from './vnode'
-import { NO } from '@mini-dev-vue3/shared'
+import { NO } from '@minivue3/shared'
 
 export type CreateAppFunction<HostElement> = (rootComponent: any) => any
 
