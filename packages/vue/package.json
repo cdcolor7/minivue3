@@ -1,6 +1,6 @@
 {
   "name": "mini-dev-vue3",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "keywords": [],
   "author": "cdcolor7 <276214101@qq.com>",
@@ -28,9 +28,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@mini-dev-vue3/compiler-dom": "^0.1.0",
-    "@mini-dev-vue3/runtime-dom": "^0.1.0",
-    "@mini-dev-vue3/shared": "^0.1.0"
+    "@mini-dev-vue3/compiler-dom": "^0.1.1",
+    "@mini-dev-vue3/runtime-dom": "^0.1.1",
+    "@mini-dev-vue3/shared": "^0.1.1"
   },
   "gitHead": "17b059df907d19ca95d325731144b2b63486c753"
 }
