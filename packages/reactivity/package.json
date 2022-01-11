@@ -1,6 +1,6 @@
 {
   "name": "@minivue3/reactivity",
-  "version": "0.2.0",
+  "version": "0.0.0",
   "description": "",
   "keywords": [],
   "author": "cdcolor7 <276214101@qq.com>",
@@ -28,7 +28,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@minivue3/shared": "^0.2.0"
+    "@minivue3/shared": "^0.0.0"
   },
   "gitHead": "ece89509ba4d1d43d7b01ddef0893430637c393a"
 }
