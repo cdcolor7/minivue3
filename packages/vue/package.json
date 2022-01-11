@@ -1,6 +1,6 @@
 {
   "name": "minivue3",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "keywords": [],
   "author": "cdcolor7 <276214101@qq.com>",
@@ -28,9 +28,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@minivue3/compiler-dom": "^0.0.0",
-    "@minivue3/runtime-dom": "^0.0.0",
-    "@minivue3/shared": "^0.0.0"
+    "@minivue3/compiler-dom": "^0.0.1",
+    "@minivue3/runtime-dom": "^0.0.1",
+    "@minivue3/shared": "^0.0.1"
   },
   "gitHead": "ece89509ba4d1d43d7b01ddef0893430637c393a"
 }
