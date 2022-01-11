@@ -1,10 +1,4 @@
-import {
-  extend,
-  hasChanged,
-  hasOwn,
-  isArray,
-  isObject
-} from '@mini-dev-vue3/shared'
+import { extend, hasChanged, hasOwn, isArray, isObject } from '@minivue3/shared'
 import { ReactiveFlags, readonly, reactive, Target } from './reactive'
 import { track, trigger } from './effect'
 import { TrackOpTypes, TriggerOpTypes } from './operations'

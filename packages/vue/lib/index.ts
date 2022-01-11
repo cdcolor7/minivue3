@@ -1,7 +1,7 @@
-// import { RenderFunction } from '@mini-dev-vue3/runtime-core'
-import { isString, NOOP } from '@mini-dev-vue3/shared'
-import { compile } from '@mini-dev-vue3/compiler-dom'
-// import * as runtimeDom from '@mini-dev-vue3/runtime-dom'
+// import { RenderFunction } from '@minivue3/runtime-core'
+import { isString, NOOP } from '@minivue3/shared'
+import { compile } from '@minivue3/compiler-dom'
+// import * as runtimeDom from '@minivue3/runtime-dom'
 
 function compileToFunction(template: string | HTMLElement, options?: any): any {
   // RenderFunction
@@ -36,4 +36,4 @@ function compileToFunction(template: string | HTMLElement, options?: any): any {
 // compileToFunction('#app')
 
 export { compileToFunction as compile }
-export * from '@mini-dev-vue3/runtime-dom'
+export * from '@minivue3/runtime-dom'

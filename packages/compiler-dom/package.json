@@ -1,5 +1,5 @@
 {
-  "name": "@mini-dev-vue3/compiler-dom",
+  "name": "@minivue3/compiler-dom",
   "version": "0.1.3",
   "description": "> TODO: description",
   "author": "cdcolor7 <276214101@qq.com>",
@@ -28,8 +28,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@mini-dev-vue3/compiler-core": "^0.1.3",
-    "@mini-dev-vue3/shared": "^0.1.3"
+    "@minivue3/compiler-core": "^0.1.3",
+    "@minivue3/shared": "^0.1.3"
   },
-  "gitHead": "88db636cf21ec06a8e9fd309d2773489d8f2d066"
+  "gitHead": "ece89509ba4d1d43d7b01ddef0893430637c393a"
 }

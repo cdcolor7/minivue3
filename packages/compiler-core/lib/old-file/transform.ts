@@ -1,4 +1,4 @@
-import { isArray, isString } from '@mini-dev-vue3/shared'
+import { isArray, isString } from '@minivue3/shared'
 import { ExpressionNode, NodeTypes, RootNode } from './ast'
 import { TO_DISPLAY_STRING, CREATE_COMMENT } from './runtimeHelpers'
 export interface ImportItem {
@@ -116,7 +116,7 @@ export function traverseNode(node: any, context: any) {
     case NodeTypes.COMMENT:
       if (!context.ssr) {
         // inject import for the Comment symbol, which is needed for creating
-        // commentimport { RootNode } from '@mini-dev-vue3/compiler-dom';
+        // commentimport { RootNode } from '@minivue3/compiler-dom';
         context.helper(CREATE_COMMENT)
       }
       break

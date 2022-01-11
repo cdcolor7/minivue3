@@ -156,7 +156,7 @@ export default {
     "skipLibCheck": true,
     "experimentalDecorators": true,
     "paths":{
-      "@mini-dev-vue3/*": ["packages/*/lib"]
+      "@minivue3/*": ["packages/*/lib"]
     }
   }
 }

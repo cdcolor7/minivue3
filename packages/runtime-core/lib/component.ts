@@ -1,5 +1,5 @@
-import { markRaw, shallowReadonly, proxyRefs } from '@mini-dev-vue3/reactivity'
-import { ShapeFlags } from '@mini-dev-vue3/shared'
+import { markRaw, shallowReadonly, proxyRefs } from '@minivue3/reactivity'
+import { ShapeFlags } from '@minivue3/shared'
 import { emit } from './componentEmits'
 import { initProps } from './componentProps'
 import { PublicInstanceProxyHandlers } from './componentPublicInstance'

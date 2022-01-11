@@ -1,4 +1,4 @@
-import { hasOwn } from '@mini-dev-vue3/shared'
+import { hasOwn } from '@minivue3/shared'
 
 export type PublicPropertiesMap = Record<string, (i: any) => any>
 

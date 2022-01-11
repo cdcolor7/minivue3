@@ -1,4 +1,4 @@
-import { hasChanged, isArray } from '@mini-dev-vue3/shared'
+import { hasChanged, isArray } from '@minivue3/shared'
 import { createDep } from './dep'
 import { toRaw, toReactive, isProxy, isReactive } from './reactive'
 import { trackEffects, triggerEffects, isTracking } from './effect'

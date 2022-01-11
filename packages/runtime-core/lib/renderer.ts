@@ -1,8 +1,8 @@
 import { VNode, Fragment, Text } from './vnode'
 import { createAppAPI, CreateAppFunction } from './apiCreateApp'
-import { ShapeFlags } from '@mini-dev-vue3/shared'
+import { ShapeFlags } from '@minivue3/shared'
 import { createComponentInstance, setupComponent } from './component'
-import { ReactiveEffect } from '@mini-dev-vue3/reactivity'
+import { ReactiveEffect } from '@minivue3/reactivity'
 import { queueJob, SchedulerJob } from './scheduler'
 import { shouldUpdateComponent } from './componentRenderUtils'
 export interface Renderer<HostElement = RendererElement> {
