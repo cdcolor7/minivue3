@@ -21,7 +21,6 @@
     ]
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "repository": {
@@ -31,5 +30,5 @@
   "scripts": {
     "test": "jest"
   },
-  "gitHead": "d500f07eaeec53db1e9c7124d905ab643341e6b7"
+  "gitHead": "88db636cf21ec06a8e9fd309d2773489d8f2d066"
 }
