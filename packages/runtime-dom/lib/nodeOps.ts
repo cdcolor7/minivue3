@@ -1,4 +1,4 @@
-import { RendererOptions } from '@mini-dev-vue3/runtime-core'
+import { RendererOptions } from '@minivue3/runtime-core'
 
 export const svgNS = 'http://www.w3.org/2000/svg'
 const doc = (typeof document !== 'undefined' ? document : null) as Document

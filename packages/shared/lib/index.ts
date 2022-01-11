@@ -6,6 +6,7 @@ export * from './shapeFlags'
 export * from './slotFlags'
 export * from './domTagConfig'
 
+export const EMPTY_OBJ: { readonly [key: string]: any } = {}
 export const NOOP = () => {}
 export const NO = () => false
 // 必须有on+大写字母的格式开头

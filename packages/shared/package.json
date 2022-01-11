@@ -1,10 +1,10 @@
 {
-  "name": "@mini-dev-vue3/shared",
-  "version": "1.0.0",
+  "name": "@minivue3/shared",
+  "version": "0.0.1",
   "description": "> TODO: description",
   "author": "cdcolor7 <276214101@qq.com>",
   "homepage": "",
-  "license": "ISC",
+  "license": "MIT",
   "main": "index.js",
   "types": "dist/shared.d.ts",
   "directories": {
@@ -21,7 +21,7 @@
     ]
   },
   "publishConfig": {
-    "registry": "http://registry.npm.taobao.org/"
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -29,5 +29,6 @@
   },
   "scripts": {
     "test": "jest"
-  }
+  },
+  "gitHead": "ece89509ba4d1d43d7b01ddef0893430637c393a"
 }

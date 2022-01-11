@@ -1,10 +1,10 @@
 {
-  "name": "@mini-dev-vue3/compiler-core",
-  "version": "1.0.0",
+  "name": "@minivue3/compiler-core",
+  "version": "0.0.1",
   "description": "> TODO: description",
   "author": "cdcolor7 <276214101@qq.com>",
   "homepage": "",
-  "license": "ISC",
+  "license": "MIT",
   "main": "index.js",
   "types": "dist/compiler-core.d.ts",
   "directories": {
@@ -22,7 +22,7 @@
     ]
   },
   "publishConfig": {
-    "registry": "http://registry.npm.taobao.org/"
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@mini-dev-vue3/shared": "^1.0.0"
-  }
+    "@minivue3/shared": "^0.0.1"
+  },
+  "gitHead": "ece89509ba4d1d43d7b01ddef0893430637c393a"
 }

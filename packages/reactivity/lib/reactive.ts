@@ -1,4 +1,4 @@
-import { def, isObject } from '@mini-dev-vue3/shared'
+import { def, isObject } from '@minivue3/shared'
 import {
   mutableHandlers,
   readonlyHandlers,

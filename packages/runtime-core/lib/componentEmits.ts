@@ -1,4 +1,4 @@
-import { camelize, toHandlerKey } from '@mini-dev-vue3/shared'
+import { camelize, toHandlerKey } from '@minivue3/shared'
 
 export function emit(instance: any, event: string, ...rawArgs: any[]) {
   // 1. emit 是基于 props 里面的 onXXX 的函数来进行匹配的

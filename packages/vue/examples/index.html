@@ -14,16 +14,42 @@
   </div>
   <script src="../dist/vue.global.js"></script>
   <script>
-    const { createApp, ref, h } = Vue
+    const { createApp, ref, h, reactive } = Vue
     const app = createApp({
       setup() {
-        const msg = ref('min-vue')
+        const cot = reactive({
+          msg: 'hello min vue'
+        })
+        const isChange = ref(false);
+        setTimeout(() => {
+          cot.msg = 'hello !!!'
+          isChange.value = true
+        }, 1000)
         return {
-          msg
+          cot,
+          isChange
         }
       },
       render() {
-        return h("div", { tId: 1 }, [h("h1", {}, this.msg), h("p", {}, "hello mini dev vue3 !!")]);
+        const prevChildren = [
+          h("p", { key: "A" }, "A"),
+          h("p", { key: "B" }, "B"),
+          h("p", { key: "C" }, "C"),
+          h("p", { key: "E" }, "E"),
+          h("p", { key: "F" }, "F"),
+          h("p", { key: "G" }, "G"),
+        ];
+        const nextChildren = [
+          h("p", { key: "A" }, "A"),
+          h("p", { key: "B" }, "B"),
+          h("p", { key: "E" }, "E"),
+          h("p", { key: "C" }, "C"),
+          h("p", { key: "D" }, "D"),
+          h("p", { key: "F" }, "F"),
+          h("p", { key: "G" }, "G"),
+        ];
+        // return h("div", { tId: 1 }, this.cot.msg);
+        return h("div", { tId: 1 }, [h("h1", {}, this.cot.msg), h("children", {}, this.isChange === true ? nextChildren : prevChildren)]);
       },
     })
     app.mount('#app')

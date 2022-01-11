@@ -1,5 +1,5 @@
 import { TrackOpTypes, TriggerOpTypes } from './operations'
-import { extend } from '@mini-dev-vue3/shared'
+import { extend } from '@minivue3/shared'
 import { createDep } from './dep'
 
 const targetMap = new WeakMap()

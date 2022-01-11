@@ -1,9 +1,10 @@
-import { markRaw, shallowReadonly, proxyRefs } from '@mini-dev-vue3/reactivity'
-import { ShapeFlags } from '@mini-dev-vue3/shared'
+import { markRaw, shallowReadonly, proxyRefs } from '@minivue3/reactivity'
+import { ShapeFlags } from '@minivue3/shared'
 import { emit } from './componentEmits'
 import { initProps } from './componentProps'
 import { PublicInstanceProxyHandlers } from './componentPublicInstance'
 import { initSlots } from './componentSlots'
+import { applyOptions } from './componentOptions'
 
 export type Data = Record<string, unknown> // TS自带的工具泛型
 
@@ -109,11 +110,9 @@ function handleSetupResult(instance: any, setupResult: any) {
     // 返回的是一个对象的话
     // 先存到 setupState 上
     // 先使用 @vue/reactivity 里面的 proxyRefs
-    // 后面我们自己构建
     // proxyRefs 的作用就是把 setupResult 对象做一层代理
     // 方便用户直接访问 ref 类型的值
     // 比如 setupResult 里面有个 count 是个 ref 类型的对象，用户使用的时候就可以直接使用 count 了，而不需要在 count.value
-    // 这里也就是官网里面说到的自动结构 Ref 类型
     instance.setupState = proxyRefs(setupResult)
   }
 
@@ -144,11 +143,6 @@ function createSetupContext(instance: any) {
     emit: instance.emit,
     expose: () => {} // TODO 实现 expose 函数逻辑
   }
-}
-
-// 兼容vue2.x  options api
-function applyOptions() {
-  // todo
 }
 
 // 当前组件实例

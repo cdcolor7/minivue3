@@ -11,6 +11,17 @@ export {
   ReactiveFlags
 } from './reactive'
 
-export * from './ref'
-export * from './effect'
+export { ref, isRef, toRef, toRefs, unref, proxyRefs, Ref } from './ref'
+export {
+  effect,
+  stop,
+  trigger,
+  track,
+  enableTracking,
+  resetTracking,
+  ReactiveEffect,
+  ReactiveEffectRunner,
+  ReactiveEffectOptions,
+  EffectScheduler
+} from './effect'
 export { TrackOpTypes, TriggerOpTypes } from './operations'

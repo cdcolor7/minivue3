@@ -4,8 +4,8 @@ import {
   NodeTypes,
   ParserOptions,
   TextModes
-} from '@mini-dev-vue3/compiler-core'
-import { isHTMLTag, isSVGTag, isVoidTag, makeMap } from '@mini-dev-vue3/shared'
+} from '@minivue3/compiler-core'
+import { isHTMLTag, isSVGTag, isVoidTag, makeMap } from '@minivue3/shared'
 
 const isRawTextContainer = /*#__PURE__*/ makeMap(
   'style,iframe,script,noscript',

@@ -1,4 +1,4 @@
-import { ShapeFlags } from '@mini-dev-vue3/shared'
+import { ShapeFlags } from '@minivue3/shared'
 
 export function initSlots(instance: any, children: any) {
   const { vnode } = instance

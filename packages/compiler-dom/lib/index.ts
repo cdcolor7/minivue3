@@ -8,11 +8,11 @@ import {
   // noopDirectiveTransform,
   // NodeTransform,
   // DirectiveTransform
-} from '@mini-dev-vue3/compiler-core'
+} from '@minivue3/compiler-core'
 
 // 编译器函数
 export function compile(template: string): any {
   return baseCompile(template)
 }
 
-export * from '@mini-dev-vue3/compiler-core'
+export * from '@minivue3/compiler-core'
