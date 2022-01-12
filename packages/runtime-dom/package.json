@@ -12,7 +12,8 @@
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "index.js",
+    "dist"
   ],
   "buildOptions": {
     "name": "VueRuntimeDOM"
