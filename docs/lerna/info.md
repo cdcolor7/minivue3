@@ -115,7 +115,16 @@ Leran支持按照拓扑排序规则执行命令
 ``` bash
 lerna run --stream --sort build
 lerna version # 升级版本
-lerna publish # 版本发布
+```
+发布公共库流程
+``` bash
+# 1. package.js @开头的包 publishConfig设置为公有库
+  "publishConfig": {
+    "access": "public"
+  },
+# 2. npmjs官网个人中心创建组织 Add Organization
+# 3. 版本发布
+lerna publish 
 ```
 ## 集成Babel
 1. 在项目顶层目录下创建 一个 babel.config.json 并给其设置 babelrcRoots 选项，这个选项用来设置那些子 package 会被 babel 视为"根“(不被 babel 视为根的子 程序包中的 babelrc 配置文件不会生效)
