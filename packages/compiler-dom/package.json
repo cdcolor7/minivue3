@@ -1,6 +1,6 @@
 {
   "name": "@minivue3/compiler-dom",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "> TODO: description",
   "author": "cdcolor7 <276214101@qq.com>",
   "homepage": "",
@@ -29,8 +29,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@minivue3/compiler-core": "^0.0.1",
-    "@minivue3/shared": "^0.0.1"
+    "@minivue3/compiler-core": "^0.0.2",
+    "@minivue3/shared": "^0.0.2"
   },
   "gitHead": "ece89509ba4d1d43d7b01ddef0893430637c393a"
 }
