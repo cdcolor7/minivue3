@@ -12,8 +12,16 @@ yarn # 必须
 ### 开发
 测试范例文档目录：./packages/vue/examples/
 ``` bash
-yarn dev <name> -s  # '<name>打包目标[为空默认vue,]'; -s '是否开启souceMap'
+yarn dev # 开发调试
 ```
+``` json
+{
+  "scripts": {
+    "dev": "node script/dev.js [name] -s"
+  }
+}
+```
+> [name]打包目标[为空默认vue,]; -s 是否开启souceMap
 ### 启动docs
 vue3源码详细说明文档、lerna、pnpm、rollup相关使用说明。
 ``` bash
@@ -28,9 +36,16 @@ yarn test
 ### 构建
 构建输出文件目录：./packages/*/dist/
 ``` bash
-yarn build <name>  # '<name>构建目标[为空默认全部]'
+yarn build # packages 构建
 ```
-
+``` json
+{
+  "scripts": {
+    "build": "node script/build.js [name]",
+  }
+}
+```
+> [name]构建目标[为空默认全部]  
 ### 功能实现
 #### vue
 - [✔️] vue打包入口 区分runtime/full-build构建
