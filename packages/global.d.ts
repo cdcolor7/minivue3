@@ -1,2 +1,2 @@
-declare var __VERSION__: string
-declare var __DEV__: boolean
+declare let __VERSION__: string
+declare let __DEV__: boolean

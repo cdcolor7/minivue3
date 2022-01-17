@@ -130,8 +130,8 @@ export function markRaw<T extends object>(value: T): T {
   return value
 }
 
-export const toReactive = <T extends unknown>(value: T): T =>
+export const toReactive = <T>(value: T): T =>
   isObject(value) ? reactive(value) : value
 
-export const toReadonly = <T extends unknown>(value: T): T =>
+export const toReadonly = <T>(value: T): T =>
   isObject(value) ? readonly(value as Record<any, any>) : value

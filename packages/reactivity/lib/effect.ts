@@ -160,7 +160,7 @@ export function trigger(target: object, type: TriggerOpTypes, key?: unknown) {
     return
   }
   // 先收集所有的 dep 放到 deps 里面 后面会统一处理
-  let deps: any[] = []
+  const deps: any[] = []
 
   const dep = depsMap.get(key)
 

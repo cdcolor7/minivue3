@@ -82,7 +82,7 @@ function createGetter(isReadonly = false, shallow = false) {
 // shallow 浅代理 深层代码
 function createSetter(shallow = false) {
   return function set(target: object, key: string, value: unknown) {
-    let oldValue = (target as any)[key]
+    const oldValue = (target as any)[key]
     const hadKey = isArray(target)
       ? Number(key) < target.length
       : hasOwn(target, key)

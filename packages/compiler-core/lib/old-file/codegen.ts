@@ -6,7 +6,7 @@ export interface CodegenResult {
 
 export function generate(ast: RootNode): CodegenResult {
   /*  可执行js代码生成逻辑 */
-  let context = {
+  const context = {
     code: 'render code'
   }
   return {

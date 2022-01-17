@@ -41,7 +41,7 @@ export const nodeOps: RendererOptions<Node, Element> = {
   cloneNode(el) {
     const cloned = el.cloneNode(true)
     if (`_value` in el) {
-      ;(cloned as any)._value = (el as any)._value
+      (cloned as any)._value = (el as any)._value
     }
     return cloned
   }

@@ -21,7 +21,7 @@ yarn dev # 开发调试
   }
 }
 ```
-> [name]打包目标[为空默认vue,]; -s 是否开启souceMap
+[name]打包目标（为空默认vue）; -s 是否开启souceMap
 ### 启动docs
 vue3源码详细说明文档、lerna、pnpm、rollup相关使用说明。
 ``` bash
@@ -45,7 +45,7 @@ yarn build # packages 构建
   }
 }
 ```
-> [name]构建目标[为空默认全部]  
+[name]构建目标（为空默认全部]）  
 ### 功能实现
 #### vue
 - [✔️] vue打包入口 区分runtime/full-build构建
