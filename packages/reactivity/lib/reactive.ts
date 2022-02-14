@@ -130,7 +130,7 @@ export function markRaw<T extends object>(value: T): T {
   return value
 }
 
-export const toReactive = <T>(value: T): T =>
+export const toReactive = (value: any) =>
   isObject(value) ? reactive(value) : value
 
 export const toReadonly = <T>(value: T): T =>

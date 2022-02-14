@@ -1,6 +1,6 @@
 export default {
   lang: 'en-US',
-  title: 'mini-dev-vue3 源码学习',
+  title: 'minivue3 源码学习',
   description:
     '深入学习vue3源代码，基于TypeScript语言开发、Lerna + Monorepo多包管理实现一个mini版的vue3框架',
 
@@ -38,7 +38,7 @@ export default {
       },
       {
         text: 'Gitee',
-        link: 'https://gitee.com/yiyi520/mini-dev-vue3'
+        link: 'https://gitee.com/yiyi520/minivue3'
       }
     ],
 

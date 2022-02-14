@@ -1,4 +1,4 @@
-# mini-dev-vue3
+# minivue3
 
 ### 介绍
 深入学习vue3源代码，基于TypeScript语言开发、lerna + monorepo多包管理实现一个mini版的vue3框架。

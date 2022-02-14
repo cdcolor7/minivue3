@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitee.com:yiyi520/mini-dev-vue3.git"
+    "url": "git@gitee.com:yiyi520/minivue3.git"
   },
   "scripts": {
     "test": "jest"

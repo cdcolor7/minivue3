@@ -15,7 +15,7 @@
     "noUnusedLocals": true,
     "paths":{
       "@minivue3/*": ["packages/*/lib"],
-      "mini-dev-vue3": ["packages/vue/lib"]
+      "minivue3": ["packages/vue/lib"]
     }
   }
 }
