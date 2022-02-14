@@ -97,6 +97,6 @@ yarn build # packages 构建
 [Vue3源码思维导图](https://www.processon.com/view/link/6175765c7d9c08459faeddf0#map)  
 ### 学习借鉴
 
-1、[vue-next](https://github.com/vuejs/vue-next) 源码  
+1、[vue3](https://github.com/vuejs/core) 源码  
 2、[mini-vue](https://github.com/cuixiaorui/mini-vue) 源码
 
