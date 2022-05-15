@@ -1,6 +1,6 @@
 {
   "name": "@minivue3/runtime-core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "> TODO: description",
   "author": "cdcolor7 <276214101@qq.com>",
   "homepage": "",
@@ -33,8 +33,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@minivue3/reactivity": "^0.0.2",
-    "@minivue3/shared": "^0.0.2"
+    "@minivue3/reactivity": "^0.0.3",
+    "@minivue3/shared": "^0.0.3"
   },
   "gitHead": "ece89509ba4d1d43d7b01ddef0893430637c393a"
 }
