@@ -8,6 +8,7 @@ export {
   shallowReadonly,
   markRaw,
   toRaw,
+  isShallow,
   ReactiveFlags
 } from './reactive'
 export {
@@ -29,6 +30,9 @@ export {
   ReactiveEffect,
   ReactiveEffectRunner,
   ReactiveEffectOptions,
-  EffectScheduler
+  EffectScheduler,
+  DebuggerOptions,
+  DebuggerEvent,
+  DebuggerEventExtraInfo
 } from './effect'
 export { TrackOpTypes, TriggerOpTypes } from './operations'

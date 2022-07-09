@@ -1,28 +1,78 @@
 import { markRaw, shallowReadonly, proxyRefs } from '@minivue3/reactivity'
-import { ShapeFlags } from '@minivue3/shared'
+import { EMPTY_OBJ, ShapeFlags } from '@minivue3/shared'
 import { emit } from './componentEmits'
 import { initProps } from './componentProps'
 import { PublicInstanceProxyHandlers } from './componentPublicInstance'
 import { initSlots } from './componentSlots'
 import { applyOptions } from './componentOptions'
 
+let uid = 0
 export type Data = Record<string, unknown> // TS自带的工具泛型
 
+type LifecycleHook<TFn = Function> = TFn[] | null
+
+export const enum LifecycleHooks {
+  BEFORE_CREATE = 'bc',
+  CREATED = 'c',
+  BEFORE_MOUNT = 'bm',
+  MOUNTED = 'm',
+  BEFORE_UPDATE = 'bu',
+  UPDATED = 'u',
+  BEFORE_UNMOUNT = 'bum',
+  UNMOUNTED = 'um',
+  DEACTIVATED = 'da',
+  ACTIVATED = 'a',
+  RENDER_TRIGGERED = 'rtg',
+  RENDER_TRACKED = 'rtc',
+  ERROR_CAPTURED = 'ec',
+  SERVER_PREFETCH = 'sp'
+}
+export interface ComponentInternalInstance {
+  uid: number
+  type: any
+  root: any
+  vnode: any
+  next: any
+  props: Data
+  parent: ComponentInternalInstance | null
+  provides: Data
+  ctx: Data
+  proxy: any
+  attrs: Data
+  setupState: Data
+  slots: any
+  refs: Data
+  emit: any
+  isMounted: boolean
+  isUnmounted: boolean
+  isDeactivated: boolean
+  [LifecycleHooks.BEFORE_CREATE]: LifecycleHook
+  [LifecycleHooks.CREATED]: LifecycleHook
+  [LifecycleHooks.BEFORE_MOUNT]: LifecycleHook
+  [LifecycleHooks.MOUNTED]: LifecycleHook
+  [LifecycleHooks.BEFORE_UPDATE]: LifecycleHook
+  [LifecycleHooks.UPDATED]: LifecycleHook
+  [LifecycleHooks.BEFORE_UNMOUNT]: LifecycleHook
+  [LifecycleHooks.UNMOUNTED]: LifecycleHook
+}
+
 export function createComponentInstance(vnode: any, parent: any) {
-  const instance = {
+  const instance: ComponentInternalInstance = {
+    uid: uid++,
     type: vnode.type,
     vnode,
     next: null, // 需要更新的 vnode，用于更新 component 类型的组件
-    props: {},
+    props: EMPTY_OBJ,
     parent,
     root: null,
-    provides: parent ? parent.provides : {}, //  获取 parent 的 provides 作为当前组件的初始化值 这样就可以继承 parent.provides 的属性了
+    provides: parent ? parent.provides : EMPTY_OBJ, //  获取 parent 的 provides 作为当前组件的初始化值 这样就可以继承 parent.provides 的属性了
     proxy: null,
-    attrs: {}, // 存放 attrs 的数据
-    slots: {}, // 存放插槽的数据
-    ctx: {}, // context 对象
-    setupState: {}, // 存储 setup 的返回值
-    emit: () => {},
+    attrs: EMPTY_OBJ, // 存放 attrs 的数据
+    slots: EMPTY_OBJ, // 存放插槽的数据
+    ctx: EMPTY_OBJ, // context 对象
+    refs: EMPTY_OBJ,
+    setupState: EMPTY_OBJ, // 存储 setup 的返回值
+    emit: () => EMPTY_OBJ,
     // lifecycle hooks
     // not using enums here because it results in computed properties
     isMounted: false,
@@ -146,7 +196,7 @@ function createSetupContext(instance: any) {
 }
 
 // 当前组件实例
-let currentInstance = {}
+export let currentInstance: ComponentInternalInstance | null = null
 
 // 这个接口暴露给用户，用户可以在 setup 中获取组件实例 instance
 export function getCurrentInstance(): any {

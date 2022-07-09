@@ -6,7 +6,7 @@
   ],
   "scripts": {
     "dev": "node script/dev.js vue -s",
-    "build": "node script/build.js vue",
+    "build": "node script/build.js",
     "test": "yarn workspaces run test",
     "lint": "eslint . --fix --ext .ts packages/*/lib/**.ts",
     "docs:dev": "vitepress dev docs",

@@ -1,6 +1,8 @@
 export { getCurrentInstance } from './component'
 export { RenderFunction } from './componentOptions'
 export { App, CreateAppFunction } from './apiCreateApp'
+export { watch, watchEffect } from './apiWatch'
+
 export { createRenderer, RendererOptions, Renderer } from './renderer'
 export { createVNode } from './vnode'
 // VNode types

@@ -1,4 +1,4 @@
-import { isFunction, NOOP } from '@minivue3/shared'
+import { isFuncBoolean, NOOP } from '@minivue3/shared'
 import { ReactiveFlags, toRaw } from './reactive'
 import { ReactiveEffect } from './effect'
 import { trackRefValue, triggerRefValue, Ref } from './ref'
@@ -15,12 +15,12 @@ export interface WritableComputedRef<T> extends Ref<T> {
   readonly effect: ReactiveEffect<T>
 }
 
-export type ComputedGetter<T> = (...args: any[]) => T
-export type ComputedSetter<T> = (v: T) => void
+export type ComputedGetter = (...args: any[]) => any
+export type ComputedSetter = (v: any) => void
 
-export interface WritableComputedOptions<T> {
-  get: ComputedGetter<T>
-  set: ComputedSetter<T>
+export interface WritableComputedOptions {
+  get: ComputedGetter
+  set: ComputedSetter
 }
 
 export class ComputedRefImpl<T> {
@@ -36,8 +36,8 @@ export class ComputedRefImpl<T> {
   public _cacheable: boolean
 
   constructor(
-    getter: ComputedGetter<T>,
-    private readonly _setter: ComputedSetter<T>,
+    getter: ComputedGetter,
+    private readonly _setter: ComputedSetter,
     isReadonly: boolean
   ) {
     this.dep = createDep() // 未知原因
@@ -68,23 +68,23 @@ export class ComputedRefImpl<T> {
   }
 }
 
-export function computed<T>(
-  getterOrOptions: ComputedGetter<T> | WritableComputedOptions<T>
+export function computed(
+  getterOrOptions: ComputedGetter | WritableComputedOptions
 ) {
-  let getter: ComputedGetter<T>
-  let setter: ComputedSetter<T>
+  let getter: ComputedGetter
+  let setter: ComputedSetter
 
-  const onlyGetter = isFunction(getterOrOptions)
+  const onlyGetter = isFuncBoolean(getterOrOptions)
   if (onlyGetter) {
-    getter = getterOrOptions
+    getter = getterOrOptions as ComputedGetter
     setter = __DEV__
       ? () => {
           console.warn('Write operation failed: computed value is readonly')
         }
       : NOOP
   } else {
-    getter = getterOrOptions.get
-    setter = getterOrOptions.set
+    getter = (getterOrOptions as WritableComputedOptions).get
+    setter = (getterOrOptions as WritableComputedOptions).set
   }
 
   const cRef = new ComputedRefImpl(getter, setter, onlyGetter || !setter)
