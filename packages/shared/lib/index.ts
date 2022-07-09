@@ -7,7 +7,7 @@ export * from './slotFlags'
 export * from './domTagConfig'
 
 export const EMPTY_OBJ: { readonly [key: string]: any } = {}
-export const NOOP = () => {}
+export const NOOP = () => ({})
 export const NO = () => false
 // 必须有on+大写字母的格式开头
 const onRe = /^on[^a-z]/
@@ -23,6 +23,9 @@ export const isArray = Array.isArray
 export const isString = (val: unknown): val is string => typeof val === 'string' // is类型保护
 export const isObject = (val: unknown): val is Record<any, any> =>
   val !== null && typeof val === 'object'
+
+export const isFunction = (val: unknown): val is Function =>
+  typeof val === 'function'
 
 const camelizeRE = /-(\W)/g
 /**

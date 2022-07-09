@@ -1,6 +1,7 @@
 import { TrackOpTypes, TriggerOpTypes } from './operations'
 import { extend } from '@minivue3/shared'
 import { createDep } from './dep'
+import { ComputedRefImpl } from './computed'
 
 const targetMap = new WeakMap()
 
@@ -47,6 +48,7 @@ export class ReactiveEffect<T = any> {
   active = true
   deps: any[] = []
   allowRecurse?: boolean
+  computed?: ComputedRefImpl<T>
   onStop?: () => void
 
   constructor(

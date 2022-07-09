@@ -67,7 +67,7 @@ yarn build # packages 构建
 - [✔️] trigger 触发依赖
 - [✔️] 支持 effect.stop
 - [✔️] 支持 effect.scheduler
-- [✖️] computed 的实现
+- [✔️] computed 的实现
 #### shared
 - [✔️] 工具库，通用方法
 #### runtime-dom
