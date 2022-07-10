@@ -22,14 +22,14 @@
 
     let rval = ref(10)
 
-    // let b = computed({
-    //   get: () => obj1.a * 2,
-    //   set: (val) => {
-    //     obj1.a = val  + 15
-    //   }
-    // })
+    let b = computed({
+      get: () => obj1.a * 2,
+      set: (val) => {
+        obj1.a = val  + 15
+      }
+    })
 
-    // b.value = 10
+    b.value = 10
 
     // watchEffect(() => {
     //   console.log(obj1.a)

@@ -15,12 +15,12 @@ export interface WritableComputedRef<T> extends Ref<T> {
   readonly effect: ReactiveEffect<T>
 }
 
-export type ComputedGetter = (...args: any[]) => any
-export type ComputedSetter = (v: any) => void
+export type ComputedGetter<T> = (...args: any[]) => T
+export type ComputedSetter<T> = (v: T) => void
 
-export interface WritableComputedOptions {
-  get: ComputedGetter
-  set: ComputedSetter
+export interface WritableComputedOptions<T> {
+  get: ComputedGetter<T>
+  set: ComputedSetter<T>
 }
 
 export class ComputedRefImpl<T> {
@@ -36,8 +36,8 @@ export class ComputedRefImpl<T> {
   public _cacheable: boolean
 
   constructor(
-    getter: ComputedGetter,
-    private readonly _setter: ComputedSetter,
+    getter: ComputedGetter<T>,
+    private readonly _setter: ComputedSetter<T>,
     isReadonly: boolean
   ) {
     this.dep = createDep() // 未知原因
@@ -68,23 +68,23 @@ export class ComputedRefImpl<T> {
   }
 }
 
-export function computed(
-  getterOrOptions: ComputedGetter | WritableComputedOptions
+export function computed<T>(
+  getterOrOptions: ComputedGetter<T> | WritableComputedOptions<T>
 ) {
-  let getter: ComputedGetter
-  let setter: ComputedSetter
+  let getter: ComputedGetter<T>
+  let setter: ComputedSetter<T>
 
   const onlyGetter = isFuncBoolean(getterOrOptions)
   if (onlyGetter) {
-    getter = getterOrOptions as ComputedGetter
+    getter = getterOrOptions as ComputedGetter<T>
     setter = __DEV__
       ? () => {
           console.warn('Write operation failed: computed value is readonly')
         }
       : NOOP
   } else {
-    getter = (getterOrOptions as WritableComputedOptions).get
-    setter = (getterOrOptions as WritableComputedOptions).set
+    getter = (getterOrOptions as WritableComputedOptions<T>).get
+    setter = (getterOrOptions as WritableComputedOptions<T>).set
   }
 
   const cRef = new ComputedRefImpl(getter, setter, onlyGetter || !setter)
