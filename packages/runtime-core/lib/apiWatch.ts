@@ -7,7 +7,7 @@ import {
   ReactiveEffect,
   Ref
 } from '@minivue3/reactivity'
-import { isFunction, NOOP } from '@minivue3/shared'
+import { EMPTY_OBJ, isFunction, NOOP } from '@minivue3/shared'
 import { currentInstance } from './component'
 import { callWithAsyncErrorHandling, ErrorCodes } from './errorHandling'
 import { queueJob, SchedulerJob } from './scheduler'
@@ -41,8 +41,8 @@ export function watchEffect(
   effect: WatchEffect,
   options?: WatchOptionsBase
 ): WatchStopHandle {
-  return doWatch(effect, null)
-  // return doWatch(effect, null, options)
+  // return doWatch(effect, null)
+  return doWatch(effect, null, options)
 }
 
 export function watch<T = any, Immediate extends Readonly<boolean> = false>(
@@ -50,13 +50,14 @@ export function watch<T = any, Immediate extends Readonly<boolean> = false>(
   cb: any,
   options?: WatchOptions<Immediate>
 ): WatchStopHandle {
-  return doWatch(source as any, cb)
-  // return doWatch(source as any, cb, options)
+  // return doWatch(source as any, cb)
+  return doWatch(source as any, cb, options)
 }
 
 function doWatch(
   source: WatchSource | WatchEffect | object,
-  cb: WatchCallback | null
+  cb: WatchCallback | null,
+  { immediate }: WatchOptions = EMPTY_OBJ
 ): WatchStopHandle {
   const instance = currentInstance
   let getter: () => any
@@ -103,6 +104,10 @@ function doWatch(
   scheduler = () => queueJob(job)
 
   const effect = new ReactiveEffect(getter, scheduler)
+
+  if (cb && immediate) {
+    job()
+  }
   effect.run()
 
   return () => {

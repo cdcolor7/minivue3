@@ -35,9 +35,11 @@
     //   console.log(obj1.a)
     // })
 
-    // watch(() => obj1.a, () => {
-    //   console.log(obj1.a)
-    // })
+    watch(() => obj1.a, () => {
+      console.log(obj1.a)
+    }, {
+      immediate: true
+    })
 
     // watch(rval, () => {
     //   console.log(rval.value)
