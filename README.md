@@ -1,4 +1,4 @@
-# mini-dev-vue3
+# minivue3
 
 ### 介绍
 深入学习vue3源代码，基于TypeScript语言开发、lerna + monorepo多包管理实现一个mini版的vue3框架。
@@ -12,8 +12,16 @@ yarn # 必须
 ### 开发
 测试范例文档目录：./packages/vue/examples/
 ``` bash
-yarn dev <name> -s  # '<name>打包目标[为空默认vue,]'; -s '是否开启souceMap'
+yarn dev # 开发调试
 ```
+``` json
+{
+  "scripts": {
+    "dev": "node script/dev.js [name] -s"
+  }
+}
+```
+[name]打包目标（为空默认vue）; -s 是否开启souceMap
 ### 启动docs
 vue3源码详细说明文档、lerna、pnpm、rollup相关使用说明。
 ``` bash
@@ -28,9 +36,16 @@ yarn test
 ### 构建
 构建输出文件目录：./packages/*/dist/
 ``` bash
-yarn build <name>  # '<name>构建目标[为空默认全部]'
+yarn build # packages 构建
 ```
-
+``` json
+{
+  "scripts": {
+    "build": "node script/build.js [name]",
+  }
+}
+```
+[name]构建目标（为空默认全部]）  
 ### 功能实现
 #### vue
 - [✔️] vue打包入口 区分runtime/full-build构建
@@ -52,7 +67,9 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 - [✔️] trigger 触发依赖
 - [✔️] 支持 effect.stop
 - [✔️] 支持 effect.scheduler
-- [✖️] computed 的实现
+- [✔️] computed 的实现
+- [✔️] watchEffect 的实现
+- [✔️] watch 的实现(ref, reactive 侦听单一源)
 #### shared
 - [✔️] 工具库，通用方法
 #### runtime-dom
@@ -82,6 +99,6 @@ yarn build <name>  # '<name>构建目标[为空默认全部]'
 [Vue3源码思维导图](https://www.processon.com/view/link/6175765c7d9c08459faeddf0#map)  
 ### 学习借鉴
 
-1、[vue-next](https://github.com/vuejs/vue-next) 源码  
+1、[vue3](https://github.com/vuejs/core) 源码  
 2、[mini-vue](https://github.com/cuixiaorui/mini-vue) 源码
 

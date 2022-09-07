@@ -37,7 +37,7 @@ export function _createVNode(
   type: any,
   props: (Data & VNodeProps) | null = null,
   children: unknown = null,
-  patchFlag: number = 0,
+  patchFlag = 0,
   dynamicProps: string[] | null = null,
   isBlockNode = false
 ): any {
@@ -123,7 +123,7 @@ export function normalizeChildren(vnode: VNode, children: unknown) {
 /**
  * @private
  */
-export function createTextVNode(text: string = ' ', flag: number = 0): VNode {
+export function createTextVNode(text = ' ', flag = 0): VNode {
   return createVNode(Text, null, text, flag)
 }
 

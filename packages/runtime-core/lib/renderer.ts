@@ -16,7 +16,7 @@ export type RootRenderFunction<HostElement = RendererElement> = (
   isSVG?: boolean
 ) => void
 
-export interface RendererElement extends RendererNode {}
+export type RendererElement = RendererNode
 
 export interface RendererNode {
   [key: string]: any
@@ -392,8 +392,8 @@ function baseCreateRenderer(options: RendererOptions): any {
       // a,b,[c,d,e],f,g
       // a,b,[e,c,d],f,g
 
-      let s1 = i
-      let s2 = i
+      const s1 = i
+      const s2 = i
       const keyToNewIndexMap = new Map()
       let moved = false
       let maxNewIndexSoFar = 0

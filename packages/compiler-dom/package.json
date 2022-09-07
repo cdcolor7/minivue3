@@ -1,6 +1,6 @@
 {
   "name": "@minivue3/compiler-dom",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "> TODO: description",
   "author": "cdcolor7 <276214101@qq.com>",
   "homepage": "",
@@ -12,7 +12,8 @@
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "index.js",
+    "dist"
   ],
   "buildOptions": {
     "name": "VueCompilerDOM"
@@ -22,14 +23,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitee.com:yiyi520/mini-dev-vue3.git"
+    "url": "git@gitee.com:yiyi520/minivue3.git"
   },
   "scripts": {
     "test": "jest"
   },
   "dependencies": {
-    "@minivue3/compiler-core": "^0.0.1",
-    "@minivue3/shared": "^0.0.1"
+    "@minivue3/compiler-core": "^0.0.3",
+    "@minivue3/shared": "^0.0.3"
   },
   "gitHead": "ece89509ba4d1d43d7b01ddef0893430637c393a"
 }

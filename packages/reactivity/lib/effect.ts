@@ -1,6 +1,7 @@
 import { TrackOpTypes, TriggerOpTypes } from './operations'
 import { extend } from '@minivue3/shared'
 import { createDep } from './dep'
+import { ComputedRefImpl } from './computed'
 
 const targetMap = new WeakMap()
 
@@ -11,6 +12,24 @@ export interface ReactiveEffectOptions {
   scope?: any
   allowRecurse?: boolean
   onStop?: () => void
+}
+
+export type DebuggerEvent = {
+  effect: ReactiveEffect
+} & DebuggerEventExtraInfo
+
+export type DebuggerEventExtraInfo = {
+  target: object
+  type: TrackOpTypes | TriggerOpTypes
+  key: any
+  newValue?: any
+  oldValue?: any
+  oldTarget?: Map<any, any> | Set<any>
+}
+
+export interface DebuggerOptions {
+  onTrack?: (event: DebuggerEvent) => void
+  onTrigger?: (event: DebuggerEvent) => void
 }
 
 export interface ReactiveEffectRunner<T = any> {
@@ -47,6 +66,7 @@ export class ReactiveEffect<T = any> {
   active = true
   deps: any[] = []
   allowRecurse?: boolean
+  computed?: ComputedRefImpl<T>
   onStop?: () => void
 
   constructor(
@@ -160,7 +180,7 @@ export function trigger(target: object, type: TriggerOpTypes, key?: unknown) {
     return
   }
   // 先收集所有的 dep 放到 deps 里面 后面会统一处理
-  let deps: any[] = []
+  const deps: any[] = []
 
   const dep = depsMap.get(key)
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mini-dev-vue3</title>
+  <title>minivue3</title>
 </head>
 <body>
   <div id="app">
@@ -14,20 +14,25 @@
   </div>
   <script src="../dist/vue.global.js"></script>
   <script>
-    const { createApp, ref, h, reactive } = Vue
+    const { createApp, ref, h, reactive, computed } = Vue
     const app = createApp({
       setup() {
         const cot = reactive({
-          msg: 'hello min vue'
+          msg: 'hello min vue',
+          foo: 1,
+          // bar: computed(() => cot.foo * 2 )
         })
         const isChange = ref(false);
+        const bar = computed(() => cot.foo * 2 )
+        console.log(bar)
         setTimeout(() => {
           cot.msg = 'hello !!!'
           isChange.value = true
         }, 1000)
         return {
           cot,
-          isChange
+          isChange,
+          bar
         }
       },
       render() {
@@ -49,7 +54,7 @@
           h("p", { key: "G" }, "G"),
         ];
         // return h("div", { tId: 1 }, this.cot.msg);
-        return h("div", { tId: 1 }, [h("h1", {}, this.cot.msg), h("children", {}, this.isChange === true ? nextChildren : prevChildren)]);
+        return h("div", { tId: 1 }, [h("h1", {}, this.cot.msg),h("p", {}, this.bar), h("children", {}, this.isChange === true ? nextChildren : prevChildren)]);
       },
     })
     app.mount('#app')

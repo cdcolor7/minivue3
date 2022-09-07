@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computed test</title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ msg }}</h1>
+    <div>hello mini dev vue3 !!</div>
+    <child-comp></child-comp>
+  </div>
+  <script src="../dist/vue.global.js"></script>
+  <script>
+    const { createApp, reactive, effect, ref, computed, watchEffect, watch } = Vue
+    
+    let obj1 = reactive({
+      a:1,
+    })
+
+    let rval = ref(10)
+
+    let b = computed({
+      get: () => obj1.a * 2,
+      set: (val) => {
+        obj1.a = val  + 15
+      }
+    })
+
+    b.value = 10
+
+    // watchEffect(() => {
+    //   console.log(obj1.a)
+    // })
+
+    watch(() => obj1.a, () => {
+      console.log(obj1.a)
+    }, {
+      immediate: true
+    })
+
+    // watch(rval, () => {
+    //   console.log(rval.value)
+    // })
+
+
+    // setTimeout(() => {
+    //   obj1.a++
+    //   console.log(b.value)
+    // }, 1000);
+
+    setInterval(() => {
+      // obj1.a = obj1.a * 2
+      // rval.value = rval.value + 1
+    }, 1000)
+
+    
+
+    
+    
+    
+  </script>
+</body>
+</html>
